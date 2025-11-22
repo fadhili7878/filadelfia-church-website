@@ -82,131 +82,133 @@ function getHonoPath(routeFile: string): { name: string; pattern: string }[] {
   return transformedParts;
 }
 
-// Register a single route
-function registerRoute(path: string, route: any) {
+// Register a single route with lazy import
+function registerRouteLazy(path: string, importFn: () => Promise<any>) {
   const methods = ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'];
+  
   for (const method of methods) {
-    if (route[method]) {
-      const handler: Handler = async (c) => {
-        const params = c.req.param();
+    const methodLowercase = method.toLowerCase();
+    const handler: Handler = async (c) => {
+      const params = c.req.param();
+      const route = await importFn();
+      if (route[method]) {
         return await route[method](c.req.raw, { params });
-      };
-      const methodLowercase = method.toLowerCase();
-      switch (methodLowercase) {
-        case 'get':
-          api.get(path, handler);
-          break;
-        case 'post':
-          api.post(path, handler);
-          break;
-        case 'put':
-          api.put(path, handler);
-          break;
-        case 'delete':
-          api.delete(path, handler);
-          break;
-        case 'patch':
-          api.patch(path, handler);
-          break;
       }
+      return c.notFound();
+    };
+    
+    switch (methodLowercase) {
+      case 'get':
+        api.get(path, handler);
+        break;
+      case 'post':
+        api.post(path, handler);
+        break;
+      case 'put':
+        api.put(path, handler);
+        break;
+      case 'delete':
+        api.delete(path, handler);
+        break;
+      case 'patch':
+        api.patch(path, handler);
+        break;
     }
   }
 }
 
-// Import and register all routes
-async function registerRoutes() {
-  // Clear existing routes  
+// Synchronous function for production route registration
+function registerProductionRoutes() {
+  console.log('Registering API routes (production mode with lazy loading)');
+  
+  registerRouteLazy('/auth/token', () => import('../src/app/api/auth/token/route.js'));
+  registerRouteLazy('/auth/expo-web-success', () => import('../src/app/api/auth/expo-web-success/route.js'));
+  // Skip ssr-test route as it's only needed for development
+  
+  console.log('Successfully registered 2 API routes (lazy)');
+}
+
+// Async function for development route registration
+async function registerDevelopmentRoutes() {
+  // In development, scan for routes dynamically
+  console.log(`Looking for API routes in: ${__dirname}`);
+  
+  const routeFiles = await findRouteFiles(__dirname).catch((error) => {
+    console.error('Error finding route files:', error);
+    return [];
+  });
+
+  if (routeFiles.length === 0) {
+    console.log('No API route files found, skipping route registration');
+    return;
+  }
+
+  const sortedRouteFiles = routeFiles
+    .slice()
+    .sort((a, b) => b.length - a.length);
+
+  // Clear existing routes before registering new ones
   api.routes = [];
 
-  if (import.meta.env.PROD) {
-    // In production, use static imports
-    console.log('Registering API routes (production mode)');
+  for (const routeFile of sortedRouteFiles) {
     try {
-      const tokenRoute = await import('../src/app/api/auth/token/route.js');
-      registerRoute('/auth/token', tokenRoute);
-      
-      const expoRoute = await import('../src/app/api/auth/expo-web-success/route.js');
-      registerRoute('/auth/expo-web-success', expoRoute);
-      
-      const ssrTestRoute = await import('../src/app/api/__create/ssr-test/route.js');
-      registerRoute('/__create/ssr-test', ssrTestRoute);
-      
-      console.log('Successfully registered 3 API routes');
-    } catch (error) {
-      console.error('Error importing static routes:', error);
-    }
-  } else {
-    // In development, scan for routes dynamically
-    console.log(`Looking for API routes in: ${__dirname}`);
-    
-    const routeFiles = await findRouteFiles(__dirname).catch((error) => {
-      console.error('Error finding route files:', error);
-      return [];
-    });
+      const route = await import(/* @vite-ignore */ `${routeFile}?update=${Date.now()}`);
 
-    if (routeFiles.length === 0) {
-      console.log('No API route files found, skipping route registration');
-      return;
-    }
-
-    const sortedRouteFiles = routeFiles
-      .slice()
-      .sort((a, b) => b.length - a.length);
-
-    for (const routeFile of sortedRouteFiles) {
-      try {
-        const route = await import(/* @vite-ignore */ `${routeFile}?update=${Date.now()}`);
-
-        const methods = ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'];
-        for (const method of methods) {
-          try {
-            if (route[method]) {
-              const parts = getHonoPath(routeFile);
-              const honoPath = `/${parts.map(({ pattern }) => pattern).join('/')}`;
-              const handler: Handler = async (c) => {
-                const params = c.req.param();
-                const updatedRoute = await import(
-                  /* @vite-ignore */ `${routeFile}?update=${Date.now()}`
-                );
-                return await updatedRoute[method](c.req.raw, { params });
-              };
-              const methodLowercase = method.toLowerCase();
-              switch (methodLowercase) {
-                case 'get':
-                  api.get(honoPath, handler);
-                  break;
-                case 'post':
-                  api.post(honoPath, handler);
-                  break;
-                case 'put':
-                  api.put(honoPath, handler);
-                  break;
-                case 'delete':
-                  api.delete(honoPath, handler);
-                  break;
-                case 'patch':
-                  api.patch(honoPath, handler);
-                  break;
-                default:
-                  console.warn(`Unsupported method: ${method}`);
-                  break;
-              }
+      const methods = ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'];
+      for (const method of methods) {
+        try {
+          if (route[method]) {
+            const parts = getHonoPath(routeFile);
+            const honoPath = `/${parts.map(({ pattern }) => pattern).join('/')}`;
+            const handler: Handler = async (c) => {
+              const params = c.req.param();
+              const updatedRoute = await import(
+                /* @vite-ignore */ `${routeFile}?update=${Date.now()}`
+              );
+              return await updatedRoute[method](c.req.raw, { params });
+            };
+            const methodLowercase = method.toLowerCase();
+            switch (methodLowercase) {
+              case 'get':
+                api.get(honoPath, handler);
+                break;
+              case 'post':
+                api.post(honoPath, handler);
+                break;
+              case 'put':
+                api.put(honoPath, handler);
+                break;
+              case 'delete':
+                api.delete(honoPath, handler);
+                break;
+              case 'patch':
+                api.patch(honoPath, handler);
+                break;
+              default:
+                console.warn(`Unsupported method: ${method}`);
+                break;
             }
-          } catch (error) {
-            console.error(`Error registering route ${routeFile} for method ${method}:`, error);
           }
+        } catch (error) {
+          console.error(`Error registering route ${routeFile} for method ${method}:`, error);
         }
-      } catch (error) {
-        console.error(`Error importing route file ${routeFile}:`, error);
       }
+    } catch (error) {
+      console.error(`Error importing route file ${routeFile}:`, error);
     }
-    
-    console.log(`Successfully registered ${sortedRouteFiles.length} API routes`);
   }
+  
+  console.log(`Successfully registered ${sortedRouteFiles.length} API routes`);
 }
 
-// Initial route registration
-await registerRoutes();
+// Initialize routes based on environment
+if (import.meta.env.PROD) {
+  registerProductionRoutes();
+} else {
+  registerDevelopmentRoutes().catch((err) => {
+    console.error('Failed to initialize routes:', err);
+  });
+}
 
 // Hot reload routes in development
 if (import.meta.env.DEV) {
@@ -215,7 +217,7 @@ if (import.meta.env.DEV) {
   });
   if (import.meta.hot) {
     import.meta.hot.accept((newSelf: any) => {
-      registerRoutes().catch((err) => {
+      registerDevelopmentRoutes().catch((err) => {
         console.error('Error reloading routes:', err);
       });
     });

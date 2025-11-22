@@ -231,7 +231,7 @@ app.all('/integrations/:path{.+}', async (c, next) => {
 app.use('/api/auth/*', authHandler());
 app.route(API_BASENAME, api);
 
-export default await createHonoServer({
+export default createHonoServer({
   app,
   defaultLogger: false,
 });
