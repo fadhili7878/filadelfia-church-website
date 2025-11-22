@@ -1,0 +1,95 @@
+{
+  "nav": {
+    "home": "Nyumbani",
+    "about": "Kuhusu",
+    "ministries": "Huduma",
+    "sermons": "Mahubiri",
+    "events": "Matukio",
+    "contact": "Mawasiliano",
+    "giveOnline": "Toa Mtandaoni"
+  },
+  "hero": {
+    "welcomeTo": "Karibu",
+    "churchName": "Kituo cha Kikristo cha Filadelfia",
+    "subtitle": "Mahali pa Imani, Tumaini, na Upendo katika Kristo",
+    "watchLive": "Tazama Moja kwa Moja",
+    "visitUs": "Tutembelee",
+    "giveOnline": "Toa Mtandaoni"
+  },
+  "serviceTimes": {
+    "title": "Muda wa Ibada",
+    "sundayMorning": "Jumapili Asubuhi",
+    "sundayTime": "9:00 AM & 11:00 AM",
+    "sundayService": "Ibada Kuu ya Jumapili",
+    "wednesdayEvening": "Jumatano Jioni",
+    "wednesdayTime": "6:30 PM",
+    "prayerMeeting": "Mkutano wa Maombi",
+    "fridayEvening": "Ijumaa Jioni",
+    "fridayTime": "6:00 PM",
+    "youthFellowship": "Ushirika wa Vijana"
+  },
+  "pastorMessage": {
+    "title": "Ujumbe kutoka kwa Mchungaji Wetu",
+    "name": "Mchungaji John Mwakasege",
+    "position": "Mchungaji Mkuu",
+    "quote": "Karibu kwenye familia yetu ya kanisa! Katika Kituo cha Kikristo cha Filadelfia, tunaamini kuwa kila mtu anayeingia mlangoni mwetu ni wa thamani kwa Mungu. Iwe unatafuta majibu, unatafuta jamii, au unataka kukua zaidi katika imani yako, utapata ukaribishaji wa joto hapa.",
+    "description": "Mchungaji John amekuwa akiongoza jumuiya yetu kwa zaidi ya miaka 15, akileta ufundishaji wa shauku na moyo wa kufikia jamii. Maono yake ni kuona kila mwanachama akiandaliwa kutumikia Mungu na kuleta mabadiliko Tanzania na zaidi.",
+    "watchMessage": "Tazama Ujumbe wa Hivi Karibuni",
+    "meetTeam": "Kutana na Timu Yetu"
+  },
+  "recentSermons": {
+    "title": "Mahubiri ya Hivi Karibuni",
+    "watchNow": "Tazama Sasa",
+    "viewAll": "Tazama Mahubiri Yote"
+  },
+  "upcomingEvents": {
+    "title": "Matukio Yanayokuja",
+    "viewAll": "Tazama Matukio Yote"
+  },
+  "ministries": {
+    "title": "Huduma Zetu",
+    "description": "Tunatoa huduma mbalimbali za kukusaidia kukua katika imani yako na kuungana na wengine katika jamii yetu.",
+    "learnMore": "Jifunze Zaidi",
+    "viewAll": "Tazama Huduma Zote",
+    "childrensMinistry": "Huduma ya Watoto",
+    "childrensDesc": "Kulea mioyo midogo katika imani",
+    "youthMinistry": "Huduma ya Vijana",
+    "youthDesc": "Kuwawezesha kizazi kipya",
+    "womensMinistry": "Huduma ya Wanawake",
+    "womensDesc": "Kujenga udugu katika Kristo",
+    "mensMinistry": "Huduma ya Wanaume",
+    "mensDesc": "Kuimarisha wanaume wa imani",
+    "worshipMinistry": "Huduma ya Ibada",
+    "worshipDesc": "Kuongoza mioyo katika sifa",
+    "bibleStudy": "Kusoma Biblia",
+    "bibleStudyDesc": "Kukua kina zaidi katika Neno la Mungu"
+  },
+  "callToAction": {
+    "title": "Uko Tayari Kujiunga na Jamii Yetu?",
+    "subtitle": "Iwe ni mara yako ya kwanza katika imani au unatafuta nyumba ya kanisa, tungependa kukukaribisha.",
+    "learnAboutUs": "Jifunze Kuhusu Sisi",
+    "planVisit": "Panga Ziara Yako"
+  },
+  "footer": {
+    "churchName": "Kituo cha Kikristo cha Filadelfia",
+    "tagline": "Makanisa ya Mungu ya Tanzania",
+    "description": "Jamii ya imani, tumaini, na upendo katika Yesu Kristo.",
+    "quickLinks": "Viungo vya Haraka",
+    "aboutUs": "Kuhusu Sisi",
+    "contact": "Mawasiliano",
+    "followUs": "Tufuate",
+    "serviceTimes": "Muda wa Ibada",
+    "sundayService": "Jumapili: 9:00 AM & 11:00 AM",
+    "wednesdayService": "Jumatano: 6:30 PM",
+    "fridayService": "Ijumaa: 6:00 PM",
+    "officeHours": "Ofisi: Jumatatu-Ijumaa 9AM-5PM",
+    "copyright": "2025 Kituo cha Kikristo cha Filadelfia. Haki zote zimehifadhiwa."
+  },
+  "whatsapp": {
+    "tooltip": "Ongea nasi kwenye WhatsApp",
+    "helpMessage": "Unahitaji msaada? Ongea nasi!"
+  },
+  "language": {
+    "current": "SW"
+  }
+}

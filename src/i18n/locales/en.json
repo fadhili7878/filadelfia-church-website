@@ -1,0 +1,95 @@
+{
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "ministries": "Ministries",
+    "sermons": "Sermons",
+    "events": "Events",
+    "contact": "Contact",
+    "giveOnline": "Give Online"
+  },
+  "hero": {
+    "welcomeTo": "Welcome to",
+    "churchName": "Filadelfia Christian Centre",
+    "subtitle": "A Place of Faith, Hope, and Love in Christ",
+    "watchLive": "Watch Live",
+    "visitUs": "Visit Us",
+    "giveOnline": "Give Online"
+  },
+  "serviceTimes": {
+    "title": "Service Times",
+    "sundayMorning": "Sunday Morning",
+    "sundayTime": "9:00 AM & 11:00 AM",
+    "sundayService": "Main Worship Service",
+    "wednesdayEvening": "Wednesday Evening",
+    "wednesdayTime": "6:30 PM",
+    "prayerMeeting": "Prayer Meeting",
+    "fridayEvening": "Friday Evening",
+    "fridayTime": "6:00 PM",
+    "youthFellowship": "Youth Fellowship"
+  },
+  "pastorMessage": {
+    "title": "A Word from Our Pastor",
+    "name": "Pastor John Mwakasege",
+    "position": "Senior Pastor",
+    "quote": "Welcome to our church family! At Filadelfia Christian Centre, we believe that every person who walks through our doors is precious to God. Whether you're seeking answers, looking for community, or wanting to grow deeper in your faith, you'll find a warm welcome here.",
+    "description": "Pastor John has been leading our congregation for over 15 years, bringing passionate teaching and a heart for community outreach. His vision is to see every member equipped to serve God and make a difference in Tanzania and beyond.",
+    "watchMessage": "Watch Recent Message",
+    "meetTeam": "Meet Our Team"
+  },
+  "recentSermons": {
+    "title": "Recent Sermons",
+    "watchNow": "Watch Now",
+    "viewAll": "View All Sermons"
+  },
+  "upcomingEvents": {
+    "title": "Upcoming Events",
+    "viewAll": "View All Events"
+  },
+  "ministries": {
+    "title": "Our Ministries",
+    "description": "We offer various ministries to help you grow in your faith and connect with others in our community.",
+    "learnMore": "Learn More",
+    "viewAll": "View All Ministries",
+    "childrensMinistry": "Children's Ministry",
+    "childrensDesc": "Nurturing young hearts in faith",
+    "youthMinistry": "Youth Ministry",
+    "youthDesc": "Empowering the next generation",
+    "womensMinistry": "Women's Ministry",
+    "womensDesc": "Building sisterhood in Christ",
+    "mensMinistry": "Men's Ministry",
+    "mensDesc": "Strengthening men of faith",
+    "worshipMinistry": "Worship Ministry",
+    "worshipDesc": "Leading hearts in praise",
+    "bibleStudy": "Bible Study",
+    "bibleStudyDesc": "Growing deeper in God's Word"
+  },
+  "callToAction": {
+    "title": "Ready to Join Our Community?",
+    "subtitle": "Whether you're new to faith or looking for a church home, we'd love to welcome you.",
+    "learnAboutUs": "Learn About Us",
+    "planVisit": "Plan Your Visit"
+  },
+  "footer": {
+    "churchName": "Filadelfia Christian Centre",
+    "tagline": "Tanzania Assemblies of God",
+    "description": "A community of faith, hope, and love in Jesus Christ.",
+    "quickLinks": "Quick Links",
+    "aboutUs": "About Us",
+    "contact": "Contact",
+    "followUs": "Follow Us",
+    "serviceTimes": "Service Times",
+    "sundayService": "Sunday: 9:00 AM & 11:00 AM",
+    "wednesdayService": "Wednesday: 6:30 PM",
+    "fridayService": "Friday: 6:00 PM",
+    "officeHours": "Office: Mon-Fri 9AM-5PM",
+    "copyright": "2025 Filadelfia Christian Centre. All rights reserved."
+  },
+  "whatsapp": {
+    "tooltip": "Chat with us on WhatsApp",
+    "helpMessage": "Need help? Chat with us!"
+  },
+  "language": {
+    "current": "EN"
+  }
+}

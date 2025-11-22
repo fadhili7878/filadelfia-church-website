@@ -1,0 +1,95 @@
+{
+  "nav": {
+    "home": "Accueil",
+    "about": "À propos",
+    "ministries": "Ministères",
+    "sermons": "Sermons",
+    "events": "Événements",
+    "contact": "Contact",
+    "giveOnline": "Donner en ligne"
+  },
+  "hero": {
+    "welcomeTo": "Bienvenue au",
+    "churchName": "Centre Chrétien Filadelfia",
+    "subtitle": "Un Lieu de Foi, d'Espoir et d'Amour en Christ",
+    "watchLive": "Regarder en Direct",
+    "visitUs": "Nous Rendre Visite",
+    "giveOnline": "Donner en Ligne"
+  },
+  "serviceTimes": {
+    "title": "Horaires des Cultes",
+    "sundayMorning": "Dimanche Matin",
+    "sundayTime": "9h00 & 11h00",
+    "sundayService": "Culte Principal du Dimanche",
+    "wednesdayEvening": "Mercredi Soir",
+    "wednesdayTime": "18h30",
+    "prayerMeeting": "Réunion de Prière",
+    "fridayEvening": "Vendredi Soir",
+    "fridayTime": "18h00",
+    "youthFellowship": "Communion des Jeunes"
+  },
+  "pastorMessage": {
+    "title": "Un Mot de Notre Pasteur",
+    "name": "Pasteur John Mwakasege",
+    "position": "Pasteur Principal",
+    "quote": "Bienvenue dans notre famille d'église ! Au Centre Chrétien Filadelfia, nous croyons que chaque personne qui franchit nos portes est précieuse pour Dieu. Que vous cherchiez des réponses, une communauté, ou que vous souhaitiez grandir dans votre foi, vous trouverez ici un accueil chaleureux.",
+    "description": "Le Pasteur John dirige notre congrégation depuis plus de 15 ans, apportant un enseignement passionné et un cœur pour l'évangélisation communautaire. Sa vision est de voir chaque membre équipé pour servir Dieu et faire une différence en Tanzanie et au-delà.",
+    "watchMessage": "Regarder le Message Récent",
+    "meetTeam": "Rencontrer Notre Équipe"
+  },
+  "recentSermons": {
+    "title": "Sermons Récents",
+    "watchNow": "Regarder Maintenant",
+    "viewAll": "Voir Tous les Sermons"
+  },
+  "upcomingEvents": {
+    "title": "Événements à Venir",
+    "viewAll": "Voir Tous les Événements"
+  },
+  "ministries": {
+    "title": "Nos Ministères",
+    "description": "Nous offrons divers ministères pour vous aider à grandir dans votre foi et à vous connecter avec d'autres dans notre communauté.",
+    "learnMore": "En Savoir Plus",
+    "viewAll": "Voir Tous les Ministères",
+    "childrensMinistry": "Ministère des Enfants",
+    "childrensDesc": "Nourrir les jeunes cœurs dans la foi",
+    "youthMinistry": "Ministère des Jeunes",
+    "youthDesc": "Autonomiser la nouvelle génération",
+    "womensMinistry": "Ministère des Femmes",
+    "womensDesc": "Construire la sororité en Christ",
+    "mensMinistry": "Ministère des Hommes",
+    "mensDesc": "Renforcer les hommes de foi",
+    "worshipMinistry": "Ministère de Louange",
+    "worshipDesc": "Conduire les cœurs dans la louange",
+    "bibleStudy": "Étude Biblique",
+    "bibleStudyDesc": "Grandir plus profondément dans la Parole de Dieu"
+  },
+  "callToAction": {
+    "title": "Prêt à Rejoindre Notre Communauté ?",
+    "subtitle": "Que vous soyez nouveau dans la foi ou que vous cherchiez une église, nous serions ravis de vous accueillir.",
+    "learnAboutUs": "En Savoir Plus sur Nous",
+    "planVisit": "Planifier Votre Visite"
+  },
+  "footer": {
+    "churchName": "Centre Chrétien Filadelfia",
+    "tagline": "Assemblées de Dieu de Tanzanie",
+    "description": "Une communauté de foi, d'espoir et d'amour en Jésus-Christ.",
+    "quickLinks": "Liens Rapides",
+    "aboutUs": "À Propos de Nous",
+    "contact": "Contact",
+    "followUs": "Nous Suivre",
+    "serviceTimes": "Horaires des Cultes",
+    "sundayService": "Dimanche : 9h00 & 11h00",
+    "wednesdayService": "Mercredi : 18h30",
+    "fridayService": "Vendredi : 18h00",
+    "officeHours": "Bureau : Lun-Ven 9h-17h",
+    "copyright": "2025 Centre Chrétien Filadelfia. Tous droits réservés."
+  },
+  "whatsapp": {
+    "tooltip": "Chattez avec nous sur WhatsApp",
+    "helpMessage": "Besoin d'aide ? Chattez avec nous !"
+  },
+  "language": {
+    "current": "FR"
+  }
+}
