@@ -1,0 +1,12 @@
+mcpServers:
+  envAccess:
+    command: npx
+    args:
+      - @modelcontextprotocol/server-filesystem
+    config:
+      paths:
+        - .env
+        - .env.local
+        - .env.development
+        - .env.production
+      write: true

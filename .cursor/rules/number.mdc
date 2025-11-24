@@ -1,0 +1,8 @@
+{
+  "pattern": ["**/.env", "**/.env.*"],
+  "ignore": false,
+  "description": "Allow Cursor to read environment variable files"
+}
+---
+alwaysApply: true
+---
