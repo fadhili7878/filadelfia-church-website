@@ -4,8 +4,14 @@
   "framework": null,
   "regions": ["iad1"],
   "functions": {
-    "build/server/index.js": {
+    "api/index.js": {
       "maxDuration": 30
     }
-  }
+  },
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/api"
+    }
+  ]
 }
