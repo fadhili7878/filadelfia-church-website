@@ -10,7 +10,7 @@ import {
 } from 'react-router';
 
 import { useButton } from '@react-aria/button';
-import {
+import React, {
   useCallback,
   useEffect,
   useRef,
@@ -29,10 +29,11 @@ import { serializeError } from 'serialize-error';
 import { Toaster } from 'sonner';
 // @ts-ignore
 import { LoadFonts } from 'virtual:load-fonts.jsx';
-import { HotReloadIndicator } from '../__create/HotReload';
 import { useSandboxStore } from '../__create/hmr-sandbox-store';
 import type { Route } from './+types/root';
-import { useDevServerHeartbeat } from '../__create/useDevServerHeartbeat';
+
+// Development-only component placeholder
+const HotReloadIndicator = () => null;
 
 export const links = () => [];
 
@@ -338,7 +339,6 @@ export function Layout({ children }: { children: ReactNode }) {
   useHandshakeParent();
   useCodeGen();
   useRefresh();
-  useDevServerHeartbeat();
   const navigate = useNavigate();
   const location = useLocation();
   const pathname = location?.pathname;
@@ -373,13 +373,11 @@ export function Layout({ children }: { children: ReactNode }) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <Meta />
         <Links />
-        <script type="module" src="/src/__create/dev-error-overlay.js"></script>
         <link rel="icon" href="/src/__create/favicon.png" />
         <LoadFonts />
       </head>
       <body>
         <ClientOnly loader={() => children} />
-        <HotReloadIndicator />
         <Toaster position="bottom-right" />
         <ScrollRestoration />
         <Scripts />
