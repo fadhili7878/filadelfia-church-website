@@ -19,6 +19,8 @@ import { getHTMLForErrorPage } from './get-html-for-error-page';
 import { isAuthAction } from './is-auth-action';
 import { API_BASENAME, api } from './route-builder';
 
+console.log('Initializing Hono server...');
+
 // Configure Neon for serverless environment
 if (typeof window === 'undefined') {
   neonConfig.webSocketConstructor = ws;
@@ -249,6 +251,8 @@ app.all('/integrations/:path{.+}', async (c, next) => {
 
 app.use('/api/auth/*', authHandler());
 app.route(API_BASENAME, api);
+
+export { app };
 
 export default createHonoServer({
   app,
