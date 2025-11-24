@@ -18,7 +18,11 @@ import NeonAdapter from './adapter';
 import { getHTMLForErrorPage } from './get-html-for-error-page';
 import { isAuthAction } from './is-auth-action';
 import { API_BASENAME, api } from './route-builder';
-neonConfig.webSocketConstructor = ws;
+
+// Configure Neon for serverless environment
+if (typeof window === 'undefined') {
+  neonConfig.webSocketConstructor = ws;
+}
 
 const als = new AsyncLocalStorage<{ requestId: string }>();
 
@@ -35,10 +39,17 @@ for (const method of ['log', 'info', 'warn', 'error', 'debug'] as const) {
   };
 }
 
-const pool = new Pool({
-  connectionString: process.env.DATABASE_URL,
-});
-const adapter = NeonAdapter(pool);
+// Initialize database pool only when DATABASE_URL is available
+let adapter;
+if (process.env.DATABASE_URL) {
+  const pool = new Pool({
+    connectionString: process.env.DATABASE_URL,
+    max: 1, // Limit connections for serverless
+  });
+  adapter = NeonAdapter(pool);
+} else {
+  console.warn('DATABASE_URL not found - database features will be limited');
+}
 
 const app = new Hono();
 
@@ -138,6 +149,10 @@ if (process.env.AUTH_SECRET) {
             }
 
             // logic to verify if user exists
+            if (!adapter) {
+              console.error('Database adapter not initialized for signin');
+              return null;
+            }
             const user = await adapter.getUserByEmail(email);
             if (!user) {
               return null;
@@ -182,6 +197,10 @@ if (process.env.AUTH_SECRET) {
             }
 
             // logic to verify if user exists
+            if (!adapter) {
+              console.error('Database adapter not initialized for signup');
+              return null;
+            }
             const user = await adapter.getUserByEmail(email);
             if (!user) {
               const newUser = await adapter.createUser({
