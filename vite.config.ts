@@ -18,11 +18,28 @@ export default defineConfig({
   envPrefix: 'NEXT_PUBLIC_',
   build: {
     target: 'esnext',
+    rollupOptions: {
+      external: (id) => {
+        // Exclude development-only packages from production build
+        if (process.env.NODE_ENV === 'production') {
+          return id.includes('react-idle-timer') || 
+                 id.includes('dev-error-overlay') ||
+                 id.includes('HotReload');
+        }
+        return false;
+      },
+      output: {
+        manualChunks: {
+          'react-vendor': ['react', 'react-dom'],
+          'auth-vendor': ['@auth/core', '@hono/auth-js'],
+        },
+      },
+    },
   },
   optimizeDeps: {
     // Explicitly include fast-glob, since it gets dynamically imported and we
     // don't want that to cause a re-bundle.
-    include: ['fast-glob', 'lucide-react'],
+    include: ['fast-glob'],
     exclude: [
       '@hono/auth-js/react',
       '@hono/auth-js',
@@ -32,6 +49,10 @@ export default defineConfig({
       '@auth/core/errors',
       'fsevents',
       'lightningcss',
+      'react-idle-timer',
+      '@chakra-ui/react',
+      '@emotion/react',
+      '@emotion/styled',
     ],
   },
   logLevel: 'info',

@@ -22,7 +22,7 @@ import {
   Globe,
   ChevronDown,
   Shield,
-} from "lucide-react";
+} from "@/lib/icons";
 import { imageStorage } from '@/lib/storage';
 
 export default function HomePage() {
