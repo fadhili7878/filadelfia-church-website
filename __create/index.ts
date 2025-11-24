@@ -40,7 +40,7 @@ for (const method of ['log', 'info', 'warn', 'error', 'debug'] as const) {
 }
 
 // Initialize database pool only when DATABASE_URL is available
-let adapter;
+let adapter: any;
 if (process.env.DATABASE_URL) {
   const pool = new Pool({
     connectionString: process.env.DATABASE_URL,
@@ -158,7 +158,7 @@ if (process.env.AUTH_SECRET) {
               return null;
             }
             const matchingAccount = user.accounts.find(
-              (account) => account.provider === 'credentials'
+              (account: any) => account.provider === 'credentials'
             );
             const accountPassword = matchingAccount?.password;
             if (!accountPassword) {
