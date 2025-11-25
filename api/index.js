@@ -1,8 +1,4 @@
-import { handle } from "hono/vercel";
-
-export const config = {
-  runtime: "vercel-nodejs@4.0.0"
-};
+import { handle } from "@hono/node-server/vercel";
 
 export default async function handler(req, res) {
   try {
@@ -13,16 +9,15 @@ export default async function handler(req, res) {
     const fn = handle(app);
     const response = await fn(req);
 
-    const text = await response.text();
+    const body = await response.text();
 
     res.status(response.status);
     for (const [key, value] of response.headers.entries()) {
       res.setHeader(key, value);
     }
-    res.send(text);
-
+    res.send(body);
   } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: "Internal Server Error" });
+    console.error("Server initialization failed:", error);
+    res.status(500).json({ error: "Internal Server Error" });
   }
 }
