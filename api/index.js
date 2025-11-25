@@ -1,23 +1,31 @@
 import { handle } from "@hono/node-server/vercel";
 
+let cachedApp;
+
 export default async function handler(req, res) {
   try {
-    // Load server build
-    const mod = await import("../build/server/index.js");
-
-    // Get the Hono app
-    const app = mod.app;
-
-    if (!app) {
-      throw new Error("Hono app not exported from build/server/index.js");
+    // Cache the app to avoid re-importing on every request
+    if (!cachedApp) {
+      const mod = await import("../build/server/index.js");
+      cachedApp = mod.app || mod.default;
+      
+      if (!cachedApp) {
+        console.error("Available exports:", Object.keys(mod));
+        throw new Error("Hono app not found in build/server/index.js");
+      }
+      
+      console.log("✅ Hono app loaded successfully");
     }
 
-    // Let the Vercel adapter handle everything
-    return handle(app)(req, res);
+    // Log the request for debugging
+    console.log(`${req.method} ${req.url}`);
+
+    // Use the Vercel adapter
+    return handle(cachedApp)(req, res);
+    
   } catch (error) {
     console.error("🔥 SERVER ERROR:", error);
     
-    // Only send error response if headers haven't been sent
     if (!res.headersSent) {
       res.status(500).json({
         error: "Internal Server Error",
