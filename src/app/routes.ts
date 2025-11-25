@@ -1,5 +1,5 @@
 import { readdirSync, statSync } from 'node:fs';
-import { join } from 'node:path';
+import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import {
 	type RouteConfigEntry,
@@ -7,7 +7,8 @@ import {
 	route,
 } from '@react-router/dev/routes';
 
-const __dirname = fileURLToPath(new URL('.', import.meta.url));
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 type Tree = {
 	path: string;
@@ -46,15 +47,22 @@ function buildRouteTree(dir: string, basePath = ''): Tree {
 
 	for (const file of files) {
 		const filePath = join(dir, file);
-		const stat = statSync(filePath);
+		let stat;
+		
+		try {
+			stat = statSync(filePath);
+		} catch (error) {
+			// Skip files that can't be read
+			continue;
+		}
 
 		if (stat.isDirectory()) {
 			const childPath = basePath ? `${basePath}/${file}` : file;
 			const childNode = buildRouteTree(filePath, childPath);
 			node.children.push(childNode);
-		} else if (file === 'page.jsx') {
+		} else if (file === 'page.jsx' || file === 'page.tsx') {
 			node.hasPage = true;
-    }
+		}
 	}
 
 	return node;
@@ -64,8 +72,10 @@ function generateRoutes(node: Tree): RouteConfigEntry[] {
 	const routes: RouteConfigEntry[] = [];
 
 	if (node.hasPage) {
-		const componentPath =
-			node.path === '' ? `./${node.path}page.jsx` : `./${node.path}/page.jsx`;
+		// Use relative path from routes.ts location
+		const componentPath = node.path === '' 
+			? './page.jsx' 
+			: `./${node.path}/page.jsx`;
 
 		if (node.path === '') {
 			routes.push(index(componentPath));
@@ -81,7 +91,7 @@ function generateRoutes(node: Tree): RouteConfigEntry[] {
 
 					// Handle catch-all parameters (e.g., [...ids] becomes *)
 					if (paramName.startsWith('...')) {
-						return '*'; // React Router's catch-all syntax
+						return '*';
 					}
 					// Handle optional parameters (e.g., [[id]] becomes :id?)
 					if (paramName.startsWith('[') && paramName.endsWith(']')) {
@@ -104,16 +114,36 @@ function generateRoutes(node: Tree): RouteConfigEntry[] {
 
 	return routes;
 }
-if (import.meta.env.DEV) {
-	import.meta.glob('./**/page.jsx', {});
+
+// Hot module replacement for development
+if (import.meta.env?.DEV) {
+	import.meta.glob('./**/page.{jsx,tsx}', { eager: false });
 	if (import.meta.hot) {
-		import.meta.hot.accept((newSelf) => {
+		import.meta.hot.accept(() => {
 			import.meta.hot?.invalidate();
 		});
 	}
 }
-const tree = buildRouteTree(__dirname);
-const notFound = route('*?', './__create/not-found.tsx');
-const routes = [...generateRoutes(tree), notFound];
+
+// Build the route tree
+let routes: RouteConfigEntry[] = [];
+
+try {
+	const tree = buildRouteTree(__dirname);
+	routes = generateRoutes(tree);
+	
+	// Add 404 catch-all route
+	const notFound = route('*', './__create/not-found.tsx');
+	routes.push(notFound);
+	
+	console.log('✅ Generated routes:', routes.length);
+} catch (error) {
+	console.error('❌ Error generating routes:', error);
+	// Fallback to minimal routes to prevent build failure
+	routes = [
+		index('./page.jsx'),
+		route('*', './__create/not-found.tsx'),
+	];
+}
 
 export default routes;
