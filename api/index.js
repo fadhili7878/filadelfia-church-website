@@ -17,7 +17,11 @@ export default async function handler(req, res) {
     }
     res.send(body);
   } catch (error) {
-    console.error("Server initialization failed:", error);
-    res.status(500).json({ error: "Internal Server Error" });
+    console.error("🔥 REAL SERVER ERROR:", error);
+    res.status(500).json({
+      error: "Internal Server Error",
+      details: error?.message,
+      stack: error?.stack
+    });
   }
 }
