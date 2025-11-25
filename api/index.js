@@ -5,33 +5,25 @@ export default async function handler(req, res) {
     // Load server build
     const mod = await import("../build/server/index.js");
 
-    // Prefer the Node "app" export — NOT default
+    // Get the Hono app
     const app = mod.app;
 
     if (!app) {
       throw new Error("Hono app not exported from build/server/index.js");
     }
 
-    // Node adapter
-    const fn = handle(app);
-
-    const response = await fn(req);
-
-    // Convert FetchResponse → Node response
-    const body = await response.text();
-
-    res.status(response.status);
-    for (const [key, value] of response.headers.entries()) {
-      res.setHeader(key, value);
-    }
-
-    res.send(body);
+    // Let the Vercel adapter handle everything
+    return handle(app)(req, res);
   } catch (error) {
-    console.error("🔥 REAL SERVER ERROR:", error);
-    res.status(500).json({
-      error: "Internal Server Error",
-      details: error?.message,
-      stack: error?.stack
-    });
+    console.error("🔥 SERVER ERROR:", error);
+    
+    // Only send error response if headers haven't been sent
+    if (!res.headersSent) {
+      res.status(500).json({
+        error: "Internal Server Error",
+        details: error?.message,
+        stack: process.env.NODE_ENV === 'development' ? error?.stack : undefined
+      });
+    }
   }
 }
