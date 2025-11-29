@@ -4,7 +4,8 @@ import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { Hono } from 'hono';
 import type { Handler } from 'hono/types';
-import updatedFetch from '../src/__create/fetch';
+import updatedFetch from './fetch';
+import path from 'node:path';
 
 const API_BASENAME = '/api';
 const api = new Hono();
@@ -14,13 +15,15 @@ const currentDir = fileURLToPath(new URL('.', import.meta.url));
 let __dirname: string;
 
 if (import.meta.env.DEV) {
-  // In development: __create/route-builder.ts -> ../src/app/api
-  __dirname = join(currentDir, '../src/app/api');
+  // In development: src/__create/route-builder.ts -> ../app/api
+  __dirname = join(currentDir, '../app/api');
+  console.log('DEV mode - API directory:', __dirname);
 } else {
   // In production: find the actual src/app/api directory from the build
   // Navigate up from build/server/assets to the project root, then to src/app/api
   const projectRoot = join(currentDir, '../../../..');
   __dirname = join(projectRoot, 'src/app/api');
+  console.log('PROD mode - API directory:', __dirname);
 }
 
 if (globalThis.fetch) {
@@ -121,8 +124,8 @@ function registerRouteLazy(path: string, importFn: () => Promise<any>) {
 function registerProductionRoutes() {
   console.log('Registering API routes (production mode with lazy loading)');
   
-  registerRouteLazy('/auth/token', () => import('../src/app/api/auth/token/route.js'));
-  registerRouteLazy('/auth/expo-web-success', () => import('../src/app/api/auth/expo-web-success/route.js'));
+  registerRouteLazy('/auth/token', () => import('../app/api/auth/token/route.js'));
+  registerRouteLazy('/auth/expo-web-success', () => import('../app/api/auth/expo-web-success/route.js'));
   // Skip ssr-test route as it's only needed for development
   
   console.log('Successfully registered 2 API routes (lazy)');
@@ -131,9 +134,10 @@ function registerProductionRoutes() {
 // Async function for development route registration
 async function registerDevelopmentRoutes() {
   // In development, scan for routes dynamically
-  console.log(`Looking for API routes in: ${__dirname}`);
+  const apiDir = path.resolve(__dirname, '../app/api');
+  console.log(`Looking for API routes in: ${apiDir}`);
   
-  const routeFiles = await findRouteFiles(__dirname).catch((error) => {
+  const routeFiles = await findRouteFiles(apiDir).catch((error) => {
     console.error('Error finding route files:', error);
     return [];
   });
@@ -151,6 +155,12 @@ async function registerDevelopmentRoutes() {
   api.routes = [];
 
   for (const routeFile of sortedRouteFiles) {
+    // Skip auth routes that conflict with built-in auth handler
+    if (routeFile.includes('/api/auth/') && !routeFile.includes('/api/auth/token')) {
+      console.log(`Skipping auth route: ${routeFile}`);
+      continue;
+    }
+    
     try {
       const route = await import(/* @vite-ignore */ `${routeFile}?update=${Date.now()}`);
 

@@ -95,6 +95,7 @@ if (process.env.AUTH_SECRET) {
         signIn: '/account/signin',
         signOut: '/account/logout',
       },
+      basePath: '/api/auth',
       skipCSRFCheck,
       session: {
         strategy: 'jwt',
@@ -249,6 +250,7 @@ app.all('/integrations/:path{.+}', async (c, next) => {
   });
 });
 
+// Configure auth handler with proper path
 app.use('/api/auth/*', authHandler());
 app.route(API_BASENAME, api);
 

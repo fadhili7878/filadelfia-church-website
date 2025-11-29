@@ -59,21 +59,21 @@ export default function ContactPage() {
   };
 
   const contactInfo = {
-    address: "123 Church Street, Kinondoni District, Dar es Salaam, Tanzania",
+    address: "Goba-Tegeta A, Dar es Salaam, Tanzania",
     phone: "+255 123 456 789",
     email: "info@filadelfiatz.org",
     website: "www.filadelfiatz.org",
   };
 
   const serviceHours = [
-    { day: "Sunday", time: "9:00 AM - 12:00 PM", service: "Sunday Services" },
+    { day: "Sunday", time: "6:00 AM - 1:00 PM", service: "Sunday Services" },
     {
       day: "Monday - Friday",
       time: "9:00 AM - 5:00 PM",
       service: "Office Hours",
     },
-    { day: "Wednesday", time: "6:30 PM - 8:00 PM", service: "Prayer Meeting" },
-    { day: "Friday", time: "6:00 PM - 9:00 PM", service: "Youth Fellowship" },
+    { day: "Wednesday", time: "4:00 PM - 6:00 PM", service: "Bible Study" },
+    { day: "Friday", time: "4:00 PM - 6:00 PM", service: "Prayer Meeting" },
     { day: "Saturday", time: "2:00 PM - 5:00 PM", service: "Special Programs" },
   ];
 
@@ -692,9 +692,9 @@ export default function ContactPage() {
             <div>
               <h4 className="font-semibold mb-4">Service Times</h4>
               <div className="space-y-2 text-sm text-gray-400">
-                <p>Sunday: 9:00 AM & 11:00 AM</p>
-                <p>Wednesday: 6:30 PM</p>
-                <p>Friday: 6:00 PM</p>
+                <p>Sunday: 6:00-8:00 AM & 9:00 AM-1:00 PM</p>
+                <p>Wednesday: 4:00-6:00 PM (Bible Study)</p>
+                <p>Friday: 4:00-6:00 PM (Prayer Meeting)</p>
                 <p>Office: Mon-Fri 9AM-5PM</p>
               </div>
             </div>

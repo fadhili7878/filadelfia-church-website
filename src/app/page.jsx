@@ -99,49 +99,10 @@ export default function HomePage() {
 
   const upcomingEvents = [
     {
-      title: "Sunday Worship Service",
-      date: "Every Sunday",
-      time: "9:00 AM & 11:00 AM",
+      title: "Pastor's Day Celebration",
+      date: "December 7, 2025",
+      time: "9:00 AM - 3:00 PM",
       location: "Main Sanctuary",
-    },
-    {
-      title: "Youth Fellowship",
-      date: "Friday",
-      time: "6:00 PM",
-      location: "Youth Hall",
-    },
-    {
-      title: "Prayer Meeting",
-      date: "Wednesday",
-      time: "6:30 PM",
-      location: "Prayer Room",
-    },
-    {
-      title: "Bible Study",
-      date: "Thursday",
-      time: "7:00 PM",
-      location: "Fellowship Hall",
-    },
-  ];
-
-  const recentSermons = [
-    {
-      title: "Walking in Faith",
-      speaker: "Pastor Neema Mndasha",
-      date: "Nov 3, 2025",
-      duration: "45 min",
-    },
-    {
-      title: "The Power of Prayer",
-      speaker: "Pastor Mary Kileo",
-      date: "Oct 27, 2025",
-      duration: "38 min",
-    },
-    {
-      title: "God's Unfailing Love",
-      speaker: "Pastor Neema Mndasha",
-      date: "Oct 20, 2025",
-      duration: "42 min",
     },
   ];
 
@@ -154,7 +115,7 @@ export default function HomePage() {
         fullDescription: "Our Children's Ministry is dedicated to creating a safe, fun, and engaging environment where children can learn about God's love through age-appropriate activities, Bible stories, and worship.",
         ageGroups: ["Nursery (0-2 years)", "Toddlers (2-4 years)", "Kids Church (5-12 years)"],
         activities: ["Bible storytelling", "Creative arts & crafts", "Music and worship", "Games and activities", "Scripture memorization"],
-        meetingTimes: "Sundays during main service (9:00 AM & 11:00 AM), Wednesday Kids Club (5:30 PM)",
+        meetingTimes: "Sundays during main service (6:00-8:00 AM & 9:00 AM-1:00 PM), Wednesday Bible Study (4:00-6:00 PM)",
         leadership: "Children's Ministry Leader Odeta Kalindile",
         contact: "children@filadelfiatz.org"
       }
@@ -537,7 +498,7 @@ export default function HomePage() {
         <div className="max-w-7xl mx-auto px-4">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold text-gray-800 mb-4">
-              A Word from Our Pastor
+              {t('pastorMessage.title')}
             </h2>
             <div className="w-24 h-1 bg-[#E31E24] mx-auto"></div>
           </div>
@@ -546,7 +507,7 @@ export default function HomePage() {
             <div className="relative">
               <img
                 src={pastorImage}
-                alt="Pastor Neema Mndasha"
+                alt={t('pastorMessage.name')}
                 className="w-full max-w-md mx-auto rounded-lg shadow-lg"
                 onError={(e) => {
                   // Fallback to static image if Supabase image fails
@@ -560,35 +521,28 @@ export default function HomePage() {
 
             <div>
               <h3 className="text-2xl font-bold text-gray-800 mb-4">
-                Pastor Neema Mndasha
+                {t('pastorMessage.name')}
               </h3>
-              <p className="text-[#E31E24] font-semibold mb-6">Senior Pastor</p>
+              <p className="text-[#E31E24] font-semibold mb-6">{t('pastorMessage.position')}</p>
 
               <div className="bg-gradient-to-r from-[#E31E24]/5 to-[#FFD500]/5 p-6 rounded-lg border-l-4 border-[#E31E24] mb-6">
                 <p className="text-gray-700 leading-relaxed italic">
-                  "Welcome to our church family! At Filadelfia Christian Centre,
-                  we believe that every person who walks through our doors is
-                  precious to God. Whether you're seeking answers, looking for
-                  community, or wanting to grow deeper in your faith, you'll
-                  find a warm welcome here."
+                  "{t('pastorMessage.quote')}"
                 </p>
               </div>
 
               <p className="text-gray-600 mb-6 leading-relaxed">
-                Pastor Neema has been leading our congregation for over 15 years,
-                bringing passionate teaching and a heart for community outreach.
-                His vision is to see every member equipped to serve God and make
-                a difference in Tanzania and beyond.
+                {t('pastorMessage.description')}
               </p>
 
               <div className="flex flex-col sm:flex-row gap-4">
                 <button className="bg-[#E31E24] text-white px-6 py-3 rounded-lg font-semibold hover:bg-red-600 transition-colors flex items-center justify-center gap-2">
                   <BookOpen size={20} />
-                  Watch Recent Message
+                  {t('pastorMessage.watchMessage')}
                 </button>
                 <button className="border-2 border-[#E31E24] text-[#E31E24] px-6 py-3 rounded-lg font-semibold hover:bg-[#E31E24] hover:text-white transition-colors flex items-center justify-center gap-2">
                   <Heart size={20} />
-                  Meet Our Team
+                  {t('pastorMessage.meetTeam')}
                 </button>
               </div>
             </div>
@@ -596,44 +550,97 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Recent Sermons Section */}
-      <section className="py-16 bg-gray-50">
+      {/* Our Core Values Section */}
+      <section className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4">
-          <h2 className="text-3xl font-bold text-center text-gray-800 mb-12">
-            Recent Sermons
-          </h2>
-          <div className="grid md:grid-cols-3 gap-8">
-            {recentSermons.map((sermon, index) => (
-              <div
-                key={index}
-                className="bg-white border rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow"
-              >
-                <div className="bg-gradient-to-r from-[#E31E24] to-[#FFD500] h-48 flex items-center justify-center">
-                  <Play className="h-16 w-16 text-white hover:scale-110 transition-transform cursor-pointer" />
-                </div>
-                <div className="p-6">
-                  <h3 className="text-xl font-semibold mb-2">{sermon.title}</h3>
-                  <p className="text-gray-600 mb-2">{sermon.speaker}</p>
-                  <div className="flex justify-between text-sm text-gray-500">
-                    <span>{sermon.date}</span>
-                    <span>{sermon.duration}</span>
-                  </div>
-                  <button className="mt-4 w-full bg-[#E31E24] text-white py-2 rounded-lg hover:bg-red-600 transition-colors">
-                    Watch Now
-                  </button>
-                </div>
-              </div>
-            ))}
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4">
+              Our Core Values
+            </h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              The foundational principles that guide our church family and shape our community
+            </p>
           </div>
-        </div>
+          
+          <div className="grid md:grid-cols-3 gap-8">
+            <div className="bg-gradient-to-br from-[#E31E24]/5 to-[#FFD500]/5 p-8 rounded-lg shadow-lg hover:shadow-xl transition-all transform hover:scale-105 border-l-4 border-[#E31E24]">
+              <div className="flex items-center gap-4 mb-4">
+                <div className="bg-[#E31E24] text-white p-4 rounded-full">
+                  <Heart className="h-8 w-8" />
+                </div>
+                <h3 className="text-2xl font-bold text-gray-800">Love</h3>
+              </div>
+              <p className="text-gray-600 leading-relaxed">
+                We believe in demonstrating God's unconditional love to everyone, creating a welcoming 
+                community where all feel accepted, valued, and cared for.
+              </p>
+            </div>
 
-        <div className="text-center mt-12">
-          <a
-            href="/sermons"
-            className="bg-[#E31E24] text-white px-8 py-3 rounded-lg font-semibold hover:bg-red-600 transition-colors inline-flex items-center gap-2"
-          >
-            View All Sermons <ChevronRight size={20} />
-          </a>
+            <div className="bg-gradient-to-br from-[#E31E24]/5 to-[#FFD500]/5 p-8 rounded-lg shadow-lg hover:shadow-xl transition-all transform hover:scale-105 border-l-4 border-[#FFD500]">
+              <div className="flex items-center gap-4 mb-4">
+                <div className="bg-[#FFD500] text-black p-4 rounded-full">
+                  <BookOpen className="h-8 w-8" />
+                </div>
+                <h3 className="text-2xl font-bold text-gray-800">Faith</h3>
+              </div>
+              <p className="text-gray-600 leading-relaxed">
+                We are committed to growing in faith through prayer, worship, and studying God's Word, 
+                trusting in His promises and guidance for our lives.
+              </p>
+            </div>
+
+            <div className="bg-gradient-to-br from-[#E31E24]/5 to-[#FFD500]/5 p-8 rounded-lg shadow-lg hover:shadow-xl transition-all transform hover:scale-105 border-l-4 border-[#E31E24]">
+              <div className="flex items-center gap-4 mb-4">
+                <div className="bg-[#E31E24] text-white p-4 rounded-full">
+                  <Users className="h-8 w-8" />
+                </div>
+                <h3 className="text-2xl font-bold text-gray-800">Community</h3>
+              </div>
+              <p className="text-gray-600 leading-relaxed">
+                We foster genuine relationships and fellowship, supporting one another through life's 
+                challenges and celebrating together in times of joy.
+              </p>
+            </div>
+
+            <div className="bg-gradient-to-br from-[#E31E24]/5 to-[#FFD500]/5 p-8 rounded-lg shadow-lg hover:shadow-xl transition-all transform hover:scale-105 border-l-4 border-[#FFD500]">
+              <div className="flex items-center gap-4 mb-4">
+                <div className="bg-[#FFD500] text-black p-4 rounded-full">
+                  <Shield className="h-8 w-8" />
+                </div>
+                <h3 className="text-2xl font-bold text-gray-800">Integrity</h3>
+              </div>
+              <p className="text-gray-600 leading-relaxed">
+                We strive to live with honesty, transparency, and moral excellence, reflecting Christ's 
+                character in all we do and say.
+              </p>
+            </div>
+
+            <div className="bg-gradient-to-br from-[#E31E24]/5 to-[#FFD500]/5 p-8 rounded-lg shadow-lg hover:shadow-xl transition-all transform hover:scale-105 border-l-4 border-[#E31E24]">
+              <div className="flex items-center gap-4 mb-4">
+                <div className="bg-[#E31E24] text-white p-4 rounded-full">
+                  <Flame className="h-8 w-8" />
+                </div>
+                <h3 className="text-2xl font-bold text-gray-800">Service</h3>
+              </div>
+              <p className="text-gray-600 leading-relaxed">
+                We are called to serve others with humility and compassion, following Jesus' example 
+                of selfless love and making a positive impact in our community.
+              </p>
+            </div>
+
+            <div className="bg-gradient-to-br from-[#E31E24]/5 to-[#FFD500]/5 p-8 rounded-lg shadow-lg hover:shadow-xl transition-all transform hover:scale-105 border-l-4 border-[#FFD500]">
+              <div className="flex items-center gap-4 mb-4">
+                <div className="bg-[#FFD500] text-black p-4 rounded-full">
+                  <Globe className="h-8 w-8" />
+                </div>
+                <h3 className="text-2xl font-bold text-gray-800">Mission</h3>
+              </div>
+              <p className="text-gray-600 leading-relaxed">
+                We are passionate about sharing the Gospel and making disciples, both locally in 
+                Tanzania and around the world, fulfilling the Great Commission.
+              </p>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -1093,7 +1100,7 @@ export default function HomePage() {
                   Sunday Service Times
                 </h4>
                 <p className="text-gray-600 mb-2">
-                  <strong>Main Service:</strong> Sundays at 9:00 AM & 11:00 AM
+                  <strong>Main Service:</strong> Sundays at 6:00-8:00 AM & 9:00 AM-1:00 PM
                 </p>
                 <p className="text-gray-600">
                   <strong>Location:</strong> 123 Church Street, Dar es Salaam

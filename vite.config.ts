@@ -60,7 +60,7 @@ export default defineConfig({
     nextPublicProcessEnv(),
     restartEnvFileChange(),
     reactRouterHonoServer({
-      serverEntryPoint: './__create/index.ts',
+      serverEntryPoint: './src/__create/index.ts',
       runtime: 'node',
     }),
     babel({

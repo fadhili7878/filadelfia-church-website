@@ -60,7 +60,7 @@ export default function MinistriesPage() {
       programs: [
         {
           name: "Sunday School",
-          time: "Every Sunday, 9:00 AM",
+          time: "Every Sunday, 6:00-8:00 AM & 9:00 AM-1:00 PM",
           description: "Bible stories, crafts, and activities",
         },
         {
@@ -96,7 +96,7 @@ export default function MinistriesPage() {
       programs: [
         {
           name: "Friday Fellowship",
-          time: "Every Friday, 6:00 PM",
+          time: "Every Friday, 4:00-6:00 PM",
           description: "Worship, teaching, and fellowship time",
         },
         {
@@ -136,7 +136,7 @@ export default function MinistriesPage() {
       programs: [
         {
           name: "Women's Bible Study",
-          time: "Tuesday, 6:00 PM",
+          time: "Tuesday, 4:00-6:00 PM",
           description: "Weekly Bible study and prayer",
         },
         {
@@ -244,7 +244,7 @@ export default function MinistriesPage() {
       programs: [
         {
           name: "Prayer Meeting",
-          time: "Wednesday, 6:30 PM",
+          time: "Wednesday, 4:00-6:00 PM",
           description: "Corporate prayer and intercession",
         },
         {

@@ -1,8 +1,17 @@
 {
+  "buildCommand": "npm run build",
+  "env": {
+    "NODE_ENV": "production"
+  },
+  "functions": {
+    "build/server/index.js": {
+      "runtime": "nodejs20.x"
+    }
+  },
   "rewrites": [
     {
       "source": "/(.*)",
-      "destination": "/api"
+      "destination": "/build/server/"
     }
   ]
 }

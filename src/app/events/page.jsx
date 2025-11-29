@@ -33,173 +33,11 @@ export default function EventsPage() {
   const events = [
     {
       id: 1,
-      title: "Sunday Worship Service",
-      description:
-        "Join us for inspiring worship, powerful messages, and fellowship with our church family.",
-      date: "2025-11-09",
-      time: "09:00",
-      endTime: "11:00",
-      location: "Main Sanctuary",
-      address: "123 Church Street, Dar es Salaam",
-      category: "worship",
-      recurring: "weekly",
-      image:
-        "https://images.unsplash.com/photo-1507692132682-ec2f18f1e37e?w=800&h=400&fit=crop",
-      organizer: "Pastor John Mwakasege",
-      capacity: 500,
-      registered: 287,
-      featured: true,
-      tags: ["Worship", "Teaching", "Fellowship"],
-    },
-    {
-      id: 2,
-      title: "Youth Fellowship Night",
-      description:
-        "An evening of worship, games, and fellowship designed specifically for our young people aged 13-25.",
-      date: "2025-11-08",
-      time: "18:00",
-      endTime: "21:00",
-      location: "Youth Hall",
-      address: "Youth Building, Church Complex",
-      category: "fellowship",
-      recurring: "weekly",
-      image:
-        "https://images.unsplash.com/photo-1529390079861-591de354faf5?w=800&h=400&fit=crop",
-      organizer: "Pastor David Moshi",
-      capacity: 100,
-      registered: 67,
-      featured: true,
-      tags: ["Youth", "Games", "Worship"],
-    },
-    {
-      id: 3,
-      title: "Prayer Meeting",
-      description:
-        "Come together as we seek God's face through corporate prayer and intercession for our community and nation.",
-      date: "2025-11-13",
-      time: "18:30",
-      endTime: "20:00",
-      location: "Prayer Room",
-      address: "Main Church Building, Second Floor",
-      category: "worship",
-      recurring: "weekly",
-      image:
-        "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&h=400&fit=crop",
-      organizer: "Deacon Peter Wangwe",
-      capacity: 80,
-      registered: 45,
-      featured: false,
-      tags: ["Prayer", "Intercession", "Community"],
-    },
-    {
-      id: 4,
-      title: "Women's Conference 2025",
-      description:
-        "A special three-day conference for women featuring guest speakers, workshops, and sisterhood activities.",
-      date: "2025-11-15",
-      time: "09:00",
-      endTime: "17:00",
-      location: "Conference Hall",
-      address: "Filadelfia Conference Center",
-      category: "special",
-      recurring: "annual",
-      image:
-        "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=800&h=400&fit=crop",
-      organizer: "Pastor Mary Kileo",
-      capacity: 200,
-      registered: 156,
-      featured: true,
-      tags: ["Women", "Conference", "Empowerment"],
-      multiDay: true,
-      endDate: "2025-11-17",
-    },
-    {
-      id: 5,
-      title: "Community Outreach",
-      description:
-        "Join us as we serve our local community through food distribution and practical assistance.",
-      date: "2025-11-16",
-      time: "08:00",
-      endTime: "14:00",
-      location: "Community Center",
-      address: "Dar es Salaam Community Center",
-      category: "outreach",
-      recurring: "monthly",
-      image:
-        "https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=800&h=400&fit=crop",
-      organizer: "Missions Team",
-      capacity: 50,
-      registered: 32,
-      featured: false,
-      tags: ["Service", "Community", "Outreach"],
-    },
-    {
-      id: 6,
-      title: "Bible Study - Book of Romans",
-      description:
-        "Deep dive into Paul's letter to the Romans with Pastor Mary. All are welcome to join this enriching study.",
-      date: "2025-11-14",
-      time: "19:00",
-      endTime: "20:30",
-      location: "Fellowship Hall",
-      address: "Main Church Building, Ground Floor",
-      category: "ministry",
-      recurring: "weekly",
-      image:
-        "https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=800&h=400&fit=crop",
-      organizer: "Pastor Mary Kileo",
-      capacity: 120,
-      registered: 78,
-      featured: false,
-      tags: ["Bible Study", "Teaching", "Romans"],
-    },
-    {
-      id: 7,
-      title: "Children's Christmas Play",
-      description:
-        "Our children's ministry presents the nativity story with songs, costumes, and joy!",
-      date: "2025-12-22",
-      time: "15:00",
-      endTime: "16:30",
-      location: "Main Sanctuary",
-      address: "123 Church Street, Dar es Salaam",
-      category: "special",
-      recurring: "annual",
-      image:
-        "https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?w=800&h=400&fit=crop",
-      organizer: "Elder Grace Mbwana",
-      capacity: 400,
-      registered: 89,
-      featured: true,
-      tags: ["Children", "Christmas", "Performance"],
-    },
-    {
-      id: 8,
-      title: "Men's Breakfast & Fellowship",
-      description:
-        "Monthly gathering for men to connect over breakfast, share testimonies, and encourage one another.",
-      date: "2025-11-30",
-      time: "08:00",
-      endTime: "10:00",
-      location: "Fellowship Hall",
-      address: "Main Church Building, Ground Floor",
-      category: "fellowship",
-      recurring: "monthly",
-      image:
-        "https://images.unsplash.com/photo-1531545514256-b1400bc00f31?w=800&h=400&fit=crop",
-      organizer: "Elder James Msaki",
-      capacity: 60,
-      registered: 42,
-      featured: false,
-      tags: ["Men", "Fellowship", "Breakfast"],
-    },
-    {
-      id: 9,
-      title: "Pastors Day Celebration",
+      title: "Pastor's Day Celebration",
       description:
         "Join us for a special day of thanksgiving and appreciation for our beloved pastors who have faithfully shepherded our souls. We celebrate their dedication, love, and unwavering commitment to serving God and our church family. Come and honor those who have poured their hearts into ministry and blessed our lives with their faithful service.",
       date: "2025-12-07",
-      time: "10:00",
+      time: "09:00",
       endTime: "15:00",
       location: "Main Sanctuary",
       address: "123 Church Street, Dar es Salaam",
@@ -208,8 +46,6 @@ export default function EventsPage() {
       image:
         "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&h=400&fit=crop",
       organizer: "Church Board",
-      capacity: 500,
-      registered: 0,
       featured: true,
       tags: ["Pastors", "Appreciation", "Thanksgiving", "Celebration"],
     },
@@ -464,9 +300,7 @@ export default function EventsPage() {
                         Featured
                       </span>
                     </div>
-                    <div className="absolute bottom-4 right-4 bg-black/70 text-white px-3 py-1 rounded-full text-sm">
-                      {event.registered}/{event.capacity} registered
-                    </div>
+
                   </div>
 
                   <div className="p-6">
@@ -710,10 +544,6 @@ export default function EventsPage() {
 
                       <div className="flex justify-between items-center">
                         <div className="flex items-center gap-4 text-sm text-gray-500">
-                          <div className="flex items-center gap-1">
-                            <Users size={14} />
-                            <span>{event.registered} registered</span>
-                          </div>
                           <span>Organizer: {event.organizer}</span>
                         </div>
 
@@ -799,13 +629,7 @@ export default function EventsPage() {
                     </div>
                   </div>
                 </div>
-                <div className="flex items-center gap-3">
-                  <Users size={18} />
-                  <span>
-                    {selectedEvent.registered} registered /{" "}
-                    {selectedEvent.capacity} capacity
-                  </span>
-                </div>
+
               </div>
 
               <p className="text-gray-600 mb-6 leading-relaxed">
