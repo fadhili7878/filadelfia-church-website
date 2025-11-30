@@ -15,8 +15,12 @@ import {
   User,
   ChevronLeft,
   ChevronRight as ChevronRightIcon,
+  Mail,
+  Phone,
+  Send,
 } from "lucide-react";
-import { imageStorage } from '@/lib/storage';
+import { imageStorage } from "@/lib/storage";
+import Footer from '@/components/Footer';
 import { gallery } from '@/lib/database';
 
 export default function MinistriesPage() {
@@ -27,6 +31,9 @@ export default function MinistriesPage() {
   const [currentYouthImageIndex, setCurrentYouthImageIndex] = useState(0);
   const [childrenImages, setChildrenImages] = useState([]);
   const [currentChildrenImageIndex, setCurrentChildrenImageIndex] = useState(0);
+  const [showScheduleModal, setShowScheduleModal] = useState(false);
+  const [showContactModal, setShowContactModal] = useState(false);
+  const [showVolunteerModal, setShowVolunteerModal] = useState(false);
   const [ministryJoinData, setMinistryJoinData] = useState({
     firstName: '',
     lastName: '',
@@ -579,35 +586,69 @@ export default function MinistriesPage() {
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
             {ministries.map((ministry) => {
               const MinistryIcon = ministry.icon;
+              const isSelected = selectedMinistry === ministry.id;
               return (
                 <button
                   key={ministry.id}
                   onClick={() => setSelectedMinistry(ministry.id)}
-                  className={`p-6 rounded-lg text-left transition-all transform hover:scale-105 ${
-                    selectedMinistry === ministry.id
-                      ? "bg-[#E31E24] text-white shadow-xl"
-                      : "bg-white hover:shadow-lg border border-gray-200"
+                  className={`group relative p-6 rounded-2xl text-left transition-all duration-300 transform hover:scale-105 overflow-hidden ${
+                    isSelected
+                      ? "bg-gradient-to-br from-[#E31E24] to-red-600 text-white shadow-2xl"
+                      : "bg-white hover:shadow-xl border-2 border-gray-200 hover:border-[#E31E24]/30"
                   }`}
                 >
-                  <MinistryIcon
-                    className={`h-12 w-12 mb-4 ${
-                      selectedMinistry === ministry.id
-                        ? "text-white"
-                        : "text-[#E31E24]"
-                    }`}
-                  />
-                  <h3 className="text-lg font-semibold mb-2">
-                    {ministry.name}
-                  </h3>
-                  <p
-                    className={`text-sm ${
-                      selectedMinistry === ministry.id
-                        ? "text-white/90"
-                        : "text-gray-600"
-                    }`}
-                  >
-                    {ministry.tagline}
-                  </p>
+                  {/* Decorative gradient overlay */}
+                  {!isSelected && (
+                    <div className="absolute inset-0 bg-gradient-to-br from-[#E31E24]/0 to-[#FFD500]/0 group-hover:from-[#E31E24]/5 group-hover:to-[#FFD500]/5 transition-all duration-300"></div>
+                  )}
+                  
+                  {/* Accent corner */}
+                  <div className={`absolute top-0 right-0 w-16 h-16 rounded-bl-full transition-all duration-300 ${
+                    isSelected 
+                      ? "bg-white/10" 
+                      : "bg-[#FFD500]/10 group-hover:bg-[#FFD500]/20"
+                  }`}></div>
+                  
+                  <div className="relative z-10">
+                    {/* Icon with background circle */}
+                    <div className={`inline-flex p-4 rounded-2xl mb-4 transition-all duration-300 ${
+                      isSelected
+                        ? "bg-white/10 group-hover:bg-white/20"
+                        : "bg-gradient-to-br from-[#E31E24]/10 to-[#FFD500]/10 group-hover:from-[#E31E24]/20 group-hover:to-[#FFD500]/20"
+                    }`}>
+                      <MinistryIcon
+                        className={`h-10 w-10 transition-transform duration-300 group-hover:scale-110 ${
+                          isSelected
+                            ? "text-white"
+                            : "text-[#E31E24]"
+                        }`}
+                      />
+                    </div>
+                    
+                    <h3 className={`text-lg font-bold mb-2 transition-colors ${
+                      isSelected ? "text-white" : "text-gray-800 group-hover:text-[#E31E24]"
+                    }`}>
+                      {ministry.name}
+                    </h3>
+                    
+                    <p
+                      className={`text-sm leading-relaxed ${
+                        isSelected
+                          ? "text-white/90"
+                          : "text-gray-600"
+                      }`}
+                    >
+                      {ministry.tagline}
+                    </p>
+                    
+                    {/* Selection indicator */}
+                    {isSelected && (
+                      <div className="mt-4 flex items-center gap-2 text-white/90">
+                        <ChevronRight size={16} />
+                        <span className="text-xs font-medium">Selected</span>
+                      </div>
+                    )}
+                  </div>
                 </button>
               );
             })}
@@ -852,39 +893,57 @@ export default function MinistriesPage() {
           </p>
 
           <div className="grid md:grid-cols-3 gap-8 mb-12">
-            <div className="bg-white p-8 rounded-lg shadow-lg">
-              <Calendar className="h-16 w-16 text-[#E31E24] mx-auto mb-6" />
-              <h3 className="text-xl font-semibold mb-4">Attend a Meeting</h3>
-              <p className="text-gray-600 mb-4">
+            <div className="group bg-white p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border-2 border-gray-100 hover:border-[#E31E24]/20">
+              <div className="bg-gradient-to-br from-[#E31E24]/10 to-red-100 p-4 rounded-full inline-flex mb-6 group-hover:scale-110 transition-transform duration-300">
+                <Calendar className="h-16 w-16 text-[#E31E24]" />
+              </div>
+              <h3 className="text-xl font-bold text-gray-800 mb-4 group-hover:text-[#E31E24] transition-colors">Attend a Meeting</h3>
+              <p className="text-gray-600 mb-6 leading-relaxed">
                 Visit one of our ministry meetings to see what we're all about
                 and meet the team.
               </p>
-              <button className="text-[#E31E24] font-semibold hover:text-red-600 transition-colors">
+              <button 
+                onClick={() => setShowScheduleModal(true)}
+                className="text-[#E31E24] font-semibold hover:text-red-600 transition-colors flex items-center gap-2 group-hover:gap-3"
+              >
                 View Schedule
+                <ChevronRight size={18} className="group-hover:translate-x-1 transition-transform" />
               </button>
             </div>
 
-            <div className="bg-white p-8 rounded-lg shadow-lg">
-              <Users className="h-16 w-16 text-[#FFD500] mx-auto mb-6" />
-              <h3 className="text-xl font-semibold mb-4">Contact a Leader</h3>
-              <p className="text-gray-600 mb-4">
+            <div className="group bg-white p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border-2 border-gray-100 hover:border-[#FFD500]/30">
+              <div className="bg-gradient-to-br from-[#FFD500]/20 to-yellow-100 p-4 rounded-full inline-flex mb-6 group-hover:scale-110 transition-transform duration-300">
+                <Users className="h-16 w-16 text-[#FFD500]" />
+              </div>
+              <h3 className="text-xl font-bold text-gray-800 mb-4 group-hover:text-[#FFD500] transition-colors">Contact a Leader</h3>
+              <p className="text-gray-600 mb-6 leading-relaxed">
                 Reach out to our ministry leaders to ask questions and learn
                 about opportunities.
               </p>
-              <button className="text-[#E31E24] font-semibold hover:text-red-600 transition-colors">
+              <button 
+                onClick={() => setShowContactModal(true)}
+                className="text-[#E31E24] font-semibold hover:text-red-600 transition-colors flex items-center gap-2 group-hover:gap-3"
+              >
                 Contact Leaders
+                <ChevronRight size={18} className="group-hover:translate-x-1 transition-transform" />
               </button>
             </div>
 
-            <div className="bg-white p-8 rounded-lg shadow-lg">
-              <Heart className="h-16 w-16 text-[#E31E24] mx-auto mb-6" />
-              <h3 className="text-xl font-semibold mb-4">Start Serving</h3>
-              <p className="text-gray-600 mb-4">
+            <div className="group bg-white p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border-2 border-gray-100 hover:border-[#E31E24]/20">
+              <div className="bg-gradient-to-br from-[#E31E24]/10 to-red-100 p-4 rounded-full inline-flex mb-6 group-hover:scale-110 transition-transform duration-300">
+                <Heart className="h-16 w-16 text-[#E31E24]" />
+              </div>
+              <h3 className="text-xl font-bold text-gray-800 mb-4 group-hover:text-[#E31E24] transition-colors">Start Serving</h3>
+              <p className="text-gray-600 mb-6 leading-relaxed">
                 Jump in and start using your gifts to make a difference in
                 people's lives.
               </p>
-              <button className="text-[#E31E24] font-semibold hover:text-red-600 transition-colors">
+              <button 
+                onClick={() => setShowVolunteerModal(true)}
+                className="text-[#E31E24] font-semibold hover:text-red-600 transition-colors flex items-center gap-2 group-hover:gap-3"
+              >
                 Volunteer Form
+                <ChevronRight size={18} className="group-hover:translate-x-1 transition-transform" />
               </button>
             </div>
           </div>
@@ -907,6 +966,278 @@ export default function MinistriesPage() {
           </div>
         </div>
       </section>
+
+      {/* View Schedule Modal */}
+      {showScheduleModal && (
+        <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+          <div className="bg-white rounded-2xl shadow-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto">
+            <div className="sticky top-0 bg-gradient-to-r from-[#E31E24] to-[#FFD500] text-white px-6 py-4 flex items-center justify-between rounded-t-2xl">
+              <div className="flex items-center gap-3">
+                <Calendar className="h-8 w-8" />
+                <h2 className="text-2xl font-bold">Ministry Schedule</h2>
+              </div>
+              <button
+                onClick={() => setShowScheduleModal(false)}
+                className="text-white hover:text-gray-200 p-2 rounded-full hover:bg-white/10 transition-colors"
+              >
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+            </div>
+
+            <div className="p-6">
+              <p className="text-gray-600 mb-6 text-center">
+                Here's when our ministries meet. Come join us!
+              </p>
+
+              <div className="space-y-4">
+                {ministries.map((ministry) => (
+                  <div key={ministry.id} className="bg-gradient-to-br from-gray-50 to-white border-2 border-gray-100 rounded-xl p-6 hover:shadow-lg transition-all">
+                    <div className="flex items-start gap-4">
+                      <div className="bg-gradient-to-br from-[#E31E24]/10 to-[#FFD500]/10 p-3 rounded-xl">
+                        <ministry.icon className="h-8 w-8 text-[#E31E24]" />
+                      </div>
+                      <div className="flex-1">
+                        <h3 className="text-xl font-bold text-gray-800 mb-3">{ministry.name}</h3>
+                        <div className="space-y-3">
+                          {ministry.programs.map((program, idx) => (
+                            <div key={idx} className="flex items-start gap-3 bg-white p-3 rounded-lg border border-gray-100">
+                              <Clock className="h-5 w-5 text-[#E31E24] mt-0.5 flex-shrink-0" />
+                              <div>
+                                <p className="font-semibold text-gray-800">{program.name}</p>
+                                <p className="text-sm text-[#E31E24] font-medium">{program.time}</p>
+                                <p className="text-sm text-gray-600 mt-1">{program.description}</p>
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              <div className="mt-8 bg-gradient-to-r from-[#E31E24]/5 to-[#FFD500]/5 border border-[#E31E24]/20 rounded-xl p-6 text-center">
+                <p className="text-gray-700 mb-4">
+                  <strong>Location:</strong> Filadelfia Christian Centre, Dar es Salaam, Tanzania
+                </p>
+                <button
+                  onClick={() => setShowScheduleModal(false)}
+                  className="bg-gradient-to-r from-[#E31E24] to-red-600 text-white px-8 py-3 rounded-full font-semibold hover:from-red-600 hover:to-[#E31E24] transition-all transform hover:scale-105"
+                >
+                  Got It!
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Contact Leaders Modal */}
+      {showContactModal && (
+        <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+          <div className="bg-white rounded-2xl shadow-2xl max-w-3xl w-full max-h-[90vh] overflow-y-auto">
+            <div className="sticky top-0 bg-gradient-to-r from-[#FFD500] to-yellow-400 text-black px-6 py-4 flex items-center justify-between rounded-t-2xl">
+              <div className="flex items-center gap-3">
+                <Users className="h-8 w-8" />
+                <h2 className="text-2xl font-bold">Contact Ministry Leaders</h2>
+              </div>
+              <button
+                onClick={() => setShowContactModal(false)}
+                className="text-black hover:text-gray-700 p-2 rounded-full hover:bg-black/5 transition-colors"
+              >
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+            </div>
+
+            <div className="p-6">
+              <p className="text-gray-600 mb-6 text-center">
+                Our ministry leaders are here to answer your questions and help you get connected.
+              </p>
+
+              <div className="grid md:grid-cols-2 gap-4 mb-6">
+                {ministries.map((ministry) => (
+                  <div key={ministry.id} className="bg-gradient-to-br from-gray-50 to-white border-2 border-gray-100 rounded-xl p-5 hover:shadow-lg hover:border-[#E31E24]/20 transition-all">
+                    <div className="flex items-center gap-3 mb-3">
+                      <div className="bg-gradient-to-br from-[#E31E24]/10 to-[#FFD500]/10 p-2 rounded-lg">
+                        <ministry.icon className="h-6 w-6 text-[#E31E24]" />
+                      </div>
+                      <h3 className="font-bold text-gray-800">{ministry.name}</h3>
+                    </div>
+                    <div className="space-y-2 text-sm">
+                      <div className="flex items-center gap-2 text-gray-700">
+                        <User className="h-4 w-4 text-[#E31E24]" />
+                        <span className="font-medium">{ministry.leader}</span>
+                      </div>
+                      <a
+                        href={`mailto:${ministry.contact}`}
+                        className="flex items-center gap-2 text-[#E31E24] hover:text-red-600 transition-colors group"
+                      >
+                        <Mail className="h-4 w-4" />
+                        <span className="group-hover:underline">{ministry.contact}</span>
+                      </a>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              <div className="bg-gradient-to-r from-blue-50 to-cyan-50 border border-blue-200 rounded-xl p-6">
+                <h3 className="font-bold text-gray-800 mb-3 flex items-center gap-2">
+                  <Phone className="h-5 w-5 text-blue-600" />
+                  General Church Office
+                </h3>
+                <div className="space-y-2 text-sm text-gray-700">
+                  <p><strong>Phone:</strong> +255 123 456 789</p>
+                  <p><strong>Email:</strong> info@filadelfiatz.org</p>
+                  <p className="mt-3 text-gray-600 italic">For location details, please visit our contact page</p>
+                </div>
+              </div>
+
+              <div className="mt-6 text-center">
+                <button
+                  onClick={() => setShowContactModal(false)}
+                  className="bg-gradient-to-r from-[#E31E24] to-red-600 text-white px-8 py-3 rounded-full font-semibold hover:from-red-600 hover:to-[#E31E24] transition-all transform hover:scale-105"
+                >
+                  Close
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Volunteer Form Modal */}
+      {showVolunteerModal && (
+        <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+          <div className="bg-white rounded-2xl shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+            <div className="sticky top-0 bg-gradient-to-r from-[#E31E24] to-red-600 text-white px-6 py-4 flex items-center justify-between rounded-t-2xl">
+              <div className="flex items-center gap-3">
+                <Heart className="h-8 w-8" />
+                <h2 className="text-2xl font-bold">General Volunteer Application</h2>
+              </div>
+              <button
+                onClick={() => setShowVolunteerModal(false)}
+                className="text-white hover:text-gray-200 p-2 rounded-full hover:bg-white/10 transition-colors"
+              >
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+            </div>
+
+            <form 
+              onSubmit={(e) => {
+                e.preventDefault();
+                alert('Thank you for volunteering! We will contact you soon.');
+                setShowVolunteerModal(false);
+              }}
+              className="p-6 space-y-6"
+            >
+              <div className="text-center mb-4">
+                <p className="text-gray-600">
+                  Thank you for your interest in serving! Please fill out this form and we'll help you find the perfect place to use your gifts.
+                </p>
+              </div>
+
+              {/* Personal Information */}
+              <div className="bg-gradient-to-br from-gray-50 to-white border-2 border-gray-100 p-5 rounded-xl">
+                <h3 className="text-lg font-bold text-gray-800 mb-4 flex items-center gap-2">
+                  <User size={20} className="text-[#E31E24]" />
+                  Your Information
+                </h3>
+                <div className="grid md:grid-cols-2 gap-4">
+                  <input
+                    type="text"
+                    placeholder="First Name *"
+                    required
+                    className="px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-[#E31E24] focus:border-transparent transition-all"
+                  />
+                  <input
+                    type="text"
+                    placeholder="Last Name *"
+                    required
+                    className="px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-[#E31E24] focus:border-transparent transition-all"
+                  />
+                  <input
+                    type="email"
+                    placeholder="Email Address *"
+                    required
+                    className="px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-[#E31E24] focus:border-transparent transition-all"
+                  />
+                  <input
+                    type="tel"
+                    placeholder="Phone Number *"
+                    required
+                    className="px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-[#E31E24] focus:border-transparent transition-all"
+                  />
+                </div>
+              </div>
+
+              {/* Ministry Interests */}
+              <div className="bg-gradient-to-br from-gray-50 to-white border-2 border-gray-100 p-5 rounded-xl">
+                <h3 className="text-lg font-bold text-gray-800 mb-4 flex items-center gap-2">
+                  <Heart size={20} className="text-[#E31E24]" />
+                  Ministry Interests
+                </h3>
+                <p className="text-sm text-gray-600 mb-3">Select all ministries you're interested in serving:</p>
+                <div className="grid md:grid-cols-2 gap-3">
+                  {ministries.map((ministry) => (
+                    <label key={ministry.id} className="flex items-center gap-2 cursor-pointer p-3 rounded-lg hover:bg-gray-100 transition-colors">
+                      <input
+                        type="checkbox"
+                        className="w-4 h-4 text-[#E31E24] bg-gray-100 border-gray-300 rounded focus:ring-[#E31E24] focus:ring-2"
+                      />
+                      <span className="text-sm font-medium text-gray-700">{ministry.name}</span>
+                    </label>
+                  ))}
+                </div>
+              </div>
+
+              {/* Skills & Availability */}
+              <div className="bg-gradient-to-br from-gray-50 to-white border-2 border-gray-100 p-5 rounded-xl">
+                <h3 className="text-lg font-bold text-gray-800 mb-4 flex items-center gap-2">
+                  <BookOpen size={20} className="text-[#E31E24]" />
+                  Your Skills & Availability
+                </h3>
+                <div className="space-y-4">
+                  <textarea
+                    placeholder="What skills, talents, or experiences can you bring to ministry? *"
+                    required
+                    rows="3"
+                    className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-[#E31E24] focus:border-transparent transition-all"
+                  />
+                  <textarea
+                    placeholder="Tell us about your availability (days/times you're free to serve)"
+                    rows="2"
+                    className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-[#E31E24] focus:border-transparent transition-all"
+                  />
+                </div>
+              </div>
+
+              {/* Submit Buttons */}
+              <div className="flex flex-col sm:flex-row gap-4 justify-end pt-4">
+                <button
+                  type="button"
+                  onClick={() => setShowVolunteerModal(false)}
+                  className="px-6 py-3 border-2 border-gray-300 text-gray-700 rounded-xl font-semibold hover:bg-gray-50 transition-all"
+                >
+                  Cancel
+                </button>
+                <button
+                  type="submit"
+                  className="px-8 py-3 bg-gradient-to-r from-[#E31E24] to-red-600 text-white rounded-xl font-semibold hover:from-red-600 hover:to-[#E31E24] transition-all transform hover:scale-105 flex items-center justify-center gap-2 shadow-lg"
+                >
+                  <Send size={20} />
+                  Submit Application
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
 
       {/* Join Ministry Modal */}
       {showJoinMinistryModal && selectedJoinMinistry && (
@@ -1131,122 +1462,7 @@ export default function MinistriesPage() {
       )}
 
       {/* Footer */}
-      <footer className="bg-gray-800 text-white py-12">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="grid md:grid-cols-4 gap-8">
-            <div>
-              <div className="flex items-center gap-3 mb-4">
-                <img
-                  src="https://ucarecdn.com/a249fb92-9b2c-4213-9811-b343543f6162/-/format/auto/"
-                  alt="TAG Logo"
-                  className="h-12 w-12"
-                />
-                <div>
-                  <h3 className="text-lg font-bold">
-                    Filadelfia Christian Centre
-                  </h3>
-                  <p className="text-sm text-gray-400">
-                    Tanzania Assemblies of God
-                  </p>
-                </div>
-              </div>
-              <p className="text-gray-400 text-sm">
-                A community of faith, hope, and love in Jesus Christ.
-              </p>
-            </div>
-
-            <div>
-              <h4 className="font-semibold mb-4">Quick Links</h4>
-              <ul className="space-y-2 text-sm">
-                <li>
-                  <a
-                    href="/about"
-                    className="text-gray-400 hover:text-white transition-colors"
-                  >
-                    About Us
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="/ministries"
-                    className="text-gray-400 hover:text-white transition-colors"
-                  >
-                    Ministries
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="/sermons"
-                    className="text-gray-400 hover:text-white transition-colors"
-                  >
-                    Sermons
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="/events"
-                    className="text-gray-400 hover:text-white transition-colors"
-                  >
-                    Events
-                  </a>
-                </li>
-              </ul>
-            </div>
-
-            <div>
-              <h4 className="font-semibold mb-4">Ministries</h4>
-              <ul className="space-y-2 text-sm">
-                <li>
-                  <button
-                    onClick={() => setSelectedMinistry("children")}
-                    className="text-gray-400 hover:text-white transition-colors"
-                  >
-                    Children's Ministry
-                  </button>
-                </li>
-                <li>
-                  <button
-                    onClick={() => setSelectedMinistry("youth")}
-                    className="text-gray-400 hover:text-white transition-colors"
-                  >
-                    Youth Ministry
-                  </button>
-                </li>
-                <li>
-                  <button
-                    onClick={() => setSelectedMinistry("womens")}
-                    className="text-gray-400 hover:text-white transition-colors"
-                  >
-                    Women's Ministry
-                  </button>
-                </li>
-                <li>
-                  <button
-                    onClick={() => setSelectedMinistry("mens")}
-                    className="text-gray-400 hover:text-white transition-colors"
-                  >
-                    Men's Ministry
-                  </button>
-                </li>
-              </ul>
-            </div>
-
-            <div>
-              <h4 className="font-semibold mb-4">Contact Info</h4>
-              <div className="space-y-2 text-sm text-gray-400">
-                <p>123 Church Street</p>
-                <p>Dar es Salaam, Tanzania</p>
-                <p>+255 123 456 789</p>
-                <p>info@filadelfiatz.org</p>
-              </div>
-            </div>
-          </div>
-
-          <div className="border-t border-gray-700 mt-8 pt-8 text-center text-sm text-gray-400">
-            <p>&copy; 2025 Filadelfia Christian Centre. All rights reserved.</p>
-          </div>
-        </div>
-      </footer>
+      <Footer />
 
       <style jsx global>{`
         @keyframes float {

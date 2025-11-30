@@ -24,6 +24,7 @@ import {
   Shield,
 } from "@/lib/icons";
 import { imageStorage } from '@/lib/storage';
+import Footer from '@/components/Footer';
 
 export default function HomePage() {
   const { t, i18n } = useTranslation();
@@ -465,29 +466,142 @@ export default function HomePage() {
       </section>
 
       {/* Service Times Section */}
-      <section className="py-16 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4 text-center">
-          <h2 className="text-3xl font-bold text-gray-800 mb-12">
-            {t('serviceTimes.title')}
-          </h2>
+      <section className="py-20 bg-gradient-to-br from-yellow-50 via-orange-50 to-red-50 relative overflow-hidden">
+        {/* Decorative background elements */}
+        <div className="absolute top-0 left-1/4 w-96 h-96 bg-gradient-to-br from-[#FFD500]/10 to-yellow-500/10 rounded-full blur-3xl animate-pulse"></div>
+        <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-gradient-to-tl from-[#E31E24]/10 to-red-500/10 rounded-full blur-3xl animate-pulse" style={{animationDelay: '1s'}}></div>
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full h-full bg-gradient-to-r from-transparent via-white/30 to-transparent"></div>
+        
+        <div className="max-w-7xl mx-auto px-4 text-center relative z-10">
+          <div className="mb-16">
+            <div className="inline-block mb-4">
+              <span className="bg-gradient-to-r from-[#E31E24] to-[#FFD500] text-white px-5 py-2 rounded-full text-sm font-bold uppercase tracking-wider">
+                Join Us
+              </span>
+            </div>
+            <h2 className="text-4xl md:text-5xl font-bold text-gray-800 mb-4">
+              {t('serviceTimes.title')}
+            </h2>
+            <p className="text-gray-600 text-lg max-w-2xl mx-auto">
+              Everyone is welcome to worship with us. Come as you are!
+            </p>
+          </div>
+          
           <div className="grid md:grid-cols-3 gap-8">
-            <div className="bg-white p-8 rounded-lg shadow-lg">
-              <Clock className="h-12 w-12 text-[#E31E24] mx-auto mb-4" />
-              <h3 className="text-xl font-semibold mb-2">{t('serviceTimes.sundayMorning')}</h3>
-              <p className="text-gray-600">{t('serviceTimes.sundayTime')}</p>
-              <p className="text-sm text-gray-500 mt-2">{t('serviceTimes.sundayService')}</p>
+            {/* Sunday Morning Service */}
+            <div className="group relative bg-white p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-3 border-2 border-transparent hover:border-[#E31E24]/20">
+              {/* Gradient effect on hover */}
+              <div className="absolute inset-0 bg-gradient-to-br from-[#E31E24]/0 to-[#FFD500]/0 group-hover:from-[#E31E24]/5 group-hover:to-[#FFD500]/5 rounded-2xl transition-all duration-500"></div>
+              
+              <div className="relative">
+                {/* Icon */}
+                <div className="relative inline-flex mb-6">
+                  <div className="bg-gradient-to-br from-[#E31E24] to-red-600 p-5 rounded-full shadow-lg group-hover:scale-110 transition-transform duration-500">
+                    <Clock className="h-10 w-10 text-white" />
+                  </div>
+                </div>
+                
+                <h3 className="text-2xl font-bold text-gray-800 mb-3 group-hover:text-[#E31E24] transition-colors duration-300">
+                  {t('serviceTimes.sundayMorning')}
+                </h3>
+                
+                {/* Time display with gradient */}
+                <div className="bg-gradient-to-r from-[#E31E24]/10 to-transparent p-4 rounded-xl mb-4">
+                  <p className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#E31E24] to-red-600">
+                    {t('serviceTimes.sundayTime')}
+                  </p>
+                </div>
+                
+                <p className="text-gray-600 leading-relaxed">
+                  {t('serviceTimes.sundayService')}
+                </p>
+                
+                {/* Bottom accent line */}
+                <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-[#E31E24] to-transparent transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500"></div>
+              </div>
             </div>
-            <div className="bg-white p-8 rounded-lg shadow-lg">
-              <Users className="h-12 w-12 text-[#FFD500] mx-auto mb-4" />
-              <h3 className="text-xl font-semibold mb-2">{t('serviceTimes.wednesdayEvening')}</h3>
-              <p className="text-gray-600">{t('serviceTimes.wednesdayTime')}</p>
-              <p className="text-sm text-gray-500 mt-2">{t('serviceTimes.prayerMeeting')}</p>
+
+            {/* Wednesday Evening Service */}
+            <div className="group relative bg-white p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-3 border-2 border-transparent hover:border-[#FFD500]/20">
+              {/* Gradient effect on hover */}
+              <div className="absolute inset-0 bg-gradient-to-br from-[#FFD500]/0 to-[#FFD500]/0 group-hover:from-[#FFD500]/5 group-hover:to-transparent rounded-2xl transition-all duration-500"></div>
+              
+              <div className="relative">
+                {/* Icon */}
+                <div className="relative inline-flex mb-6">
+                  <div className="bg-gradient-to-br from-[#FFD500] to-yellow-500 p-5 rounded-full shadow-lg group-hover:scale-110 transition-transform duration-500">
+                    <Users className="h-10 w-10 text-black" />
+                  </div>
+                </div>
+                
+                <h3 className="text-2xl font-bold text-gray-800 mb-3 group-hover:text-[#FFD500] transition-colors duration-300">
+                  {t('serviceTimes.wednesdayEvening')}
+                </h3>
+                
+                {/* Time display with gradient */}
+                <div className="bg-gradient-to-r from-[#FFD500]/10 to-transparent p-4 rounded-xl mb-4">
+                  <p className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#FFD500] to-yellow-500">
+                    {t('serviceTimes.wednesdayTime')}
+                  </p>
+                </div>
+                
+                <p className="text-gray-600 leading-relaxed">
+                  {t('serviceTimes.prayerMeeting')}
+                </p>
+                
+                {/* Bottom accent line */}
+                <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-[#FFD500] to-transparent transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500"></div>
+              </div>
             </div>
-            <div className="bg-white p-8 rounded-lg shadow-lg">
-              <BookOpen className="h-12 w-12 text-[#E31E24] mx-auto mb-4" />
-              <h3 className="text-xl font-semibold mb-2">{t('serviceTimes.fridayEvening')}</h3>
-              <p className="text-gray-600">{t('serviceTimes.fridayTime')}</p>
-              <p className="text-sm text-gray-500 mt-2">{t('serviceTimes.youthFellowship')}</p>
+
+            {/* Friday Evening Service */}
+            <div className="group relative bg-white p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-3 border-2 border-transparent hover:border-[#E31E24]/20">
+              {/* Gradient effect on hover */}
+              <div className="absolute inset-0 bg-gradient-to-br from-[#E31E24]/0 to-[#E31E24]/0 group-hover:from-[#E31E24]/5 group-hover:to-transparent rounded-2xl transition-all duration-500"></div>
+              
+              <div className="relative">
+                {/* Icon */}
+                <div className="relative inline-flex mb-6">
+                  <div className="bg-gradient-to-br from-[#E31E24] to-red-600 p-5 rounded-full shadow-lg group-hover:scale-110 transition-transform duration-500">
+                    <BookOpen className="h-10 w-10 text-white" />
+                  </div>
+                </div>
+                
+                <h3 className="text-2xl font-bold text-gray-800 mb-3 group-hover:text-[#E31E24] transition-colors duration-300">
+                  {t('serviceTimes.fridayEvening')}
+                </h3>
+                
+                {/* Time display with gradient */}
+                <div className="bg-gradient-to-r from-[#E31E24]/10 to-transparent p-4 rounded-xl mb-4">
+                  <p className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#E31E24] to-red-600">
+                    {t('serviceTimes.fridayTime')}
+                  </p>
+                </div>
+                
+                <p className="text-gray-600 leading-relaxed">
+                  {t('serviceTimes.youthFellowship')}
+                </p>
+                
+                {/* Bottom accent line */}
+                <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-[#E31E24] to-transparent transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500"></div>
+              </div>
+            </div>
+          </div>
+          
+          {/* Additional Info Banner */}
+          <div className="mt-16 bg-gradient-to-r from-[#E31E24]/10 via-[#FFD500]/10 to-[#E31E24]/10 border-2 border-[#FFD500]/30 rounded-2xl p-8">
+            <div className="flex flex-col md:flex-row items-center justify-between gap-6">
+              <div className="text-left">
+                <h4 className="text-2xl font-bold text-gray-800 mb-2">First Time Visitor?</h4>
+                <p className="text-gray-600">We'd love to meet you! No need to register, just come and join us.</p>
+              </div>
+              <a
+                href="/contact"
+                className="group inline-flex items-center gap-3 bg-gradient-to-r from-[#FFD500] to-yellow-400 text-black px-8 py-4 rounded-full font-bold hover:from-yellow-400 hover:to-[#FFD500] transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 whitespace-nowrap"
+              >
+                Plan Your Visit
+                <ChevronRight size={20} className="group-hover:translate-x-1 transition-transform" />
+              </a>
             </div>
           </div>
         </div>
@@ -645,38 +759,81 @@ export default function HomePage() {
       </section>
 
       {/* Upcoming Events Section */}
-      <section className="py-16 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4">
-          <h2 className="text-3xl font-bold text-center text-gray-800 mb-12">
-            Upcoming Events
-          </h2>
+      <section className="py-20 bg-gradient-to-br from-red-50 via-orange-50 to-yellow-50 relative overflow-hidden">
+        {/* Decorative background elements */}
+        <div className="absolute top-0 left-0 w-64 h-64 bg-gradient-to-br from-[#E31E24]/10 to-red-500/10 rounded-full blur-3xl animate-pulse"></div>
+        <div className="absolute bottom-0 right-0 w-96 h-96 bg-gradient-to-tl from-[#FFD500]/10 to-yellow-500/10 rounded-full blur-3xl animate-pulse" style={{animationDelay: '1s'}}></div>
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full h-full bg-gradient-to-r from-transparent via-white/30 to-transparent"></div>
+        
+        <div className="max-w-7xl mx-auto px-4 relative z-10">
+          <div className="text-center mb-16">
+            <div className="inline-block mb-4">
+              <span className="bg-gradient-to-r from-[#E31E24] to-[#FFD500] text-white px-4 py-1 rounded-full text-sm font-semibold">
+                Don't Miss Out
+              </span>
+            </div>
+            <h2 className="text-4xl md:text-5xl font-bold text-gray-800 mb-4">
+              Upcoming <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#E31E24] to-[#FFD500]">Events</span>
+            </h2>
+            <p className="text-gray-600 text-lg max-w-2xl mx-auto">
+              Join us for inspiring gatherings, worship, and fellowship
+            </p>
+          </div>
+          
           <div className="grid md:grid-cols-2 gap-8">
             {upcomingEvents.map((event, index) => (
               <div
                 key={index}
-                className="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow"
+                className="group relative bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2"
               >
-                <div className="flex items-start gap-4">
-                  <div className="bg-[#E31E24] text-white p-3 rounded-lg">
-                    <Calendar size={24} />
+                {/* Gradient border effect */}
+                <div className="absolute inset-0 bg-gradient-to-r from-[#E31E24] to-[#FFD500] opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                <div className="relative bg-white m-[2px] rounded-2xl p-8">
+                  {/* Date Badge */}
+                  <div className="absolute top-6 right-6 bg-gradient-to-br from-[#E31E24] to-red-600 text-white px-4 py-2 rounded-xl shadow-lg transform group-hover:scale-110 transition-transform duration-300">
+                    <div className="text-center">
+                      <div className="text-2xl font-bold">07</div>
+                      <div className="text-xs uppercase tracking-wider">Dec</div>
+                    </div>
                   </div>
-                  <div className="flex-1">
-                    <h3 className="text-xl font-semibold mb-2">
-                      {event.title}
-                    </h3>
-                    <div className="space-y-1 text-gray-600">
-                      <p className="flex items-center gap-2">
-                        <Calendar size={16} />
-                        {event.date}
-                      </p>
-                      <p className="flex items-center gap-2">
-                        <Clock size={16} />
-                        {event.time}
-                      </p>
-                      <p className="flex items-center gap-2">
-                        <MapPin size={16} />
-                        {event.location}
-                      </p>
+                  
+                  <div className="flex items-start gap-5">
+                    <div className="flex-shrink-0 bg-gradient-to-br from-[#E31E24]/10 to-[#FFD500]/10 p-4 rounded-xl group-hover:scale-110 transition-transform duration-300">
+                      <Calendar className="h-8 w-8 text-[#E31E24]" />
+                    </div>
+                    
+                    <div className="flex-1">
+                      <h3 className="text-2xl font-bold text-gray-800 mb-4 group-hover:text-[#E31E24] transition-colors">
+                        {event.title}
+                      </h3>
+                      
+                      <div className="space-y-3">
+                        <div className="flex items-center gap-3 text-gray-600">
+                          <div className="bg-[#FFD500]/20 p-2 rounded-lg">
+                            <Calendar size={18} className="text-[#E31E24]" />
+                          </div>
+                          <span className="font-medium">{event.date}</span>
+                        </div>
+                        
+                        <div className="flex items-center gap-3 text-gray-600">
+                          <div className="bg-[#FFD500]/20 p-2 rounded-lg">
+                            <Clock size={18} className="text-[#E31E24]" />
+                          </div>
+                          <span className="font-medium">{event.time}</span>
+                        </div>
+                        
+                        <div className="flex items-center gap-3 text-gray-600">
+                          <div className="bg-[#FFD500]/20 p-2 rounded-lg">
+                            <MapPin size={18} className="text-[#E31E24]" />
+                          </div>
+                          <span className="font-medium">{event.location}</span>
+                        </div>
+                      </div>
+                      
+                      <button className="mt-6 w-full bg-gradient-to-r from-[#E31E24] to-red-600 text-white py-3 rounded-xl font-semibold hover:from-red-600 hover:to-[#E31E24] transition-all duration-300 flex items-center justify-center gap-2 group-hover:shadow-lg">
+                        Register Now
+                        <ChevronRight size={20} className="group-hover:translate-x-1 transition-transform" />
+                      </button>
                     </div>
                   </div>
                 </div>
@@ -685,24 +842,39 @@ export default function HomePage() {
           </div>
         </div>
 
-        <div className="text-center mt-12">
+        <div className="text-center mt-16 relative z-10">
           <a
             href="/events"
-            className="bg-[#FFD500] text-black px-8 py-3 rounded-lg font-semibold hover:bg-yellow-400 transition-colors inline-flex items-center gap-2"
+            className="group inline-flex items-center gap-3 bg-gradient-to-r from-[#FFD500] to-yellow-400 text-black px-10 py-4 rounded-full font-bold text-lg hover:from-yellow-400 hover:to-[#FFD500] transition-all duration-300 shadow-xl hover:shadow-2xl transform hover:scale-105"
           >
-            View All Events <ChevronRight size={20} />
+            View All Events 
+            <ChevronRight size={24} className="group-hover:translate-x-2 transition-transform" />
           </a>
         </div>
       </section>
 
       {/* Ministries Preview Section */}
-      <section className="py-16 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-gray-800 mb-4">
+      <section className="py-20 bg-gradient-to-b from-white to-gray-50 relative overflow-hidden">
+        {/* Background Pattern */}
+        <div className="absolute inset-0 opacity-5">
+          <div className="absolute top-10 left-10 w-20 h-20 border-4 border-[#E31E24] rounded-full"></div>
+          <div className="absolute top-40 right-20 w-16 h-16 border-4 border-[#FFD500] rounded-lg rotate-45"></div>
+          <div className="absolute bottom-20 left-1/4 w-24 h-24 border-4 border-[#E31E24] rounded-full"></div>
+          <div className="absolute bottom-40 right-1/3 w-20 h-20 border-4 border-[#FFD500] rounded-lg rotate-12"></div>
+        </div>
+        
+        <div className="max-w-7xl mx-auto px-4 relative z-10">
+          <div className="text-center mb-16">
+            <div className="inline-block mb-4">
+              <span className="bg-[#FFD500] text-black px-4 py-1 rounded-full text-sm font-semibold flex items-center gap-2">
+                <Flame size={16} />
+                Get Involved
+              </span>
+            </div>
+            <h2 className="text-4xl md:text-5xl font-bold text-gray-800 mb-4">
               {t('ministries.title')}
             </h2>
-            <p className="text-gray-600 max-w-2xl mx-auto">
+            <p className="text-gray-600 text-lg max-w-3xl mx-auto">
               {t('ministries.description')}
             </p>
           </div>
@@ -713,68 +885,103 @@ export default function HomePage() {
               return (
                 <div
                   key={index}
-                  className="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow"
+                  className="group relative bg-white rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-3"
                 >
-                  <IconComponent className="h-12 w-12 text-[#E31E24] mb-4" />
-                  <h3 className="text-xl font-semibold mb-2">
-                    {ministry.name}
-                  </h3>
-                  <p className="text-gray-600 mb-4">{ministry.description}</p>
-                  <div className="flex flex-col gap-3">
-                    <button 
-                      onClick={() => setSelectedMinistry(ministry)}
-                      className="text-[#E31E24] font-semibold hover:text-red-600 transition-colors flex items-center gap-1"
-                    >
-                      {t('ministries.learnMore')} <ChevronRight size={16} />
-                    </button>
-                    <button 
-                      onClick={() => {
-                        setSelectedJoinMinistry(ministry);
-                        setShowJoinMinistryModal(true);
-                      }}
-                      className="bg-gradient-to-r from-[#E31E24] to-red-600 text-white px-4 py-2 rounded-lg font-semibold hover:from-red-600 hover:to-[#E31E24] transition-all transform hover:scale-105 flex items-center justify-center gap-2"
-                    >
-                      <Heart size={16} />
-                      Join Ministry
-                    </button>
+                  {/* Gradient header background */}
+                  <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-br from-[#E31E24]/90 to-[#FFD500]/80 transform origin-top transition-transform duration-500 group-hover:scale-110"></div>
+                  
+                  {/* Decorative corner accent */}
+                  <div className="absolute top-0 right-0 w-20 h-20 bg-[#FFD500]/20 rounded-bl-full transform translate-x-10 -translate-y-10 group-hover:translate-x-0 group-hover:translate-y-0 transition-transform duration-500"></div>
+                  
+                  <div className="relative p-8">
+                    {/* Icon with animated background */}
+                    <div className="relative mb-6">
+                      <div className="absolute inset-0 bg-white/90 rounded-2xl transform rotate-6 group-hover:rotate-12 transition-transform duration-500"></div>
+                      <div className="relative bg-white p-4 rounded-2xl shadow-lg inline-flex transform group-hover:scale-110 transition-transform duration-500">
+                        <IconComponent className="h-12 w-12 text-[#E31E24]" />
+                      </div>
+                    </div>
+                    
+                    <h3 className="text-2xl font-bold text-gray-800 mb-3 group-hover:text-[#E31E24] transition-colors duration-300">
+                      {ministry.name}
+                    </h3>
+                    
+                    <p className="text-gray-600 mb-6 leading-relaxed">
+                      {ministry.description}
+                    </p>
+                    
+                    {/* Divider with gradient */}
+                    <div className="h-[2px] bg-gradient-to-r from-[#E31E24] to-[#FFD500] mb-6 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500"></div>
+                    
+                    <div className="space-y-3">
+                      <button 
+                        onClick={() => setSelectedMinistry(ministry)}
+                        className="w-full text-[#E31E24] font-semibold hover:text-red-600 transition-colors flex items-center justify-center gap-2 py-2 rounded-lg hover:bg-[#E31E24]/5"
+                      >
+                        {t('ministries.learnMore')} 
+                        <ChevronRight size={18} className="group-hover:translate-x-1 transition-transform" />
+                      </button>
+                      
+                      <button 
+                        onClick={() => {
+                          setSelectedJoinMinistry(ministry);
+                          setShowJoinMinistryModal(true);
+                        }}
+                        className="w-full bg-gradient-to-r from-[#E31E24] to-red-600 text-white px-6 py-3 rounded-xl font-bold hover:from-red-600 hover:to-[#E31E24] transition-all duration-300 transform hover:scale-105 flex items-center justify-center gap-2 shadow-lg hover:shadow-xl"
+                      >
+                        <Heart size={18} className="group-hover:animate-pulse" />
+                        Join Ministry
+                      </button>
+                    </div>
+                    
+                    {/* Bottom decorative element */}
+                    <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-[#E31E24] via-[#FFD500] to-[#E31E24] transform scale-x-0 group-hover:scale-x-100 transition-transform duration-700"></div>
                   </div>
                 </div>
               );
             })}
           </div>
 
-          <div className="text-center mt-12">
+          <div className="text-center mt-16">
             <a
               href="/ministries"
-              className="bg-[#E31E24] text-white px-8 py-3 rounded-lg font-semibold hover:bg-red-600 transition-colors inline-flex items-center gap-2"
+              className="group inline-flex items-center gap-3 bg-gradient-to-r from-[#E31E24] to-red-600 text-white px-10 py-4 rounded-full font-bold text-lg hover:from-red-600 hover:to-[#E31E24] transition-all duration-300 shadow-xl hover:shadow-2xl transform hover:scale-105"
             >
-              {t('ministries.viewAll')} <ChevronRight size={20} />
+              {t('ministries.viewAll')} 
+              <ChevronRight size={24} className="group-hover:translate-x-2 transition-transform" />
             </a>
           </div>
         </div>
       </section>
 
       {/* Call to Action Section */}
-      <section className="py-16 bg-gradient-to-r from-[#E31E24] to-[#FFD500]">
-        <div className="max-w-4xl mx-auto px-4 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
+      <section className="py-20 bg-gradient-to-br from-[#E31E24] via-red-600 to-[#FFD500] relative overflow-hidden">
+        {/* Animated background elements */}
+        <div className="absolute inset-0">
+          <div className="absolute top-0 left-1/4 w-96 h-96 bg-[#FFD500]/20 rounded-full blur-3xl animate-pulse"></div>
+          <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-red-500/20 rounded-full blur-3xl animate-pulse" style={{animationDelay: '1.5s'}}></div>
+          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full h-full bg-gradient-to-r from-transparent via-white/5 to-transparent"></div>
+        </div>
+        
+        <div className="max-w-4xl mx-auto px-4 text-center relative z-10">
+          <h2 className="text-3xl md:text-4xl font-bold text-white mb-6 drop-shadow-lg">
             Ready to Join Our Community?
           </h2>
-          <p className="text-xl text-white/90 mb-8">
+          <p className="text-xl text-white/95 mb-8 drop-shadow">
             Whether you're new to faith or looking for a church home, we'd love
             to welcome you.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a
               href="/about"
-              className="bg-white text-[#E31E24] px-8 py-4 rounded-full font-semibold hover:bg-gray-100 transition-colors inline-flex items-center justify-center gap-2"
+              className="bg-white text-[#E31E24] px-8 py-4 rounded-full font-semibold hover:bg-gray-100 transition-all transform hover:scale-105 shadow-xl inline-flex items-center justify-center gap-2"
             >
               <Users size={20} />
               Learn About Us
             </a>
             <a
               href="/contact"
-              className="border-2 border-white text-white px-8 py-4 rounded-full font-semibold hover:bg-white hover:text-[#E31E24] transition-colors inline-flex items-center justify-center gap-2"
+              className="border-2 border-white text-white px-8 py-4 rounded-full font-semibold hover:bg-white hover:text-[#E31E24] transition-all transform hover:scale-105 shadow-xl inline-flex items-center justify-center gap-2"
             >
               <MapPin size={20} />
               Plan Your Visit
@@ -783,22 +990,22 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="bg-gray-800 text-white py-12">
+      {/* Footer with Language Selector */}
+      <footer className="bg-gray-800 text-white py-8">
         <div className="max-w-7xl mx-auto px-4">
-          <div className="grid md:grid-cols-4 gap-8">
+          <div className="grid md:grid-cols-4 gap-6">
             <div>
-              <div className="flex items-center gap-3 mb-4">
+              <div className="flex items-center gap-2 mb-3">
                 <img
                   src="https://ucarecdn.com/a249fb92-9b2c-4213-9811-b343543f6162/-/format/auto/"
                   alt="TAG Logo"
-                  className="h-12 w-12"
+                  className="h-10 w-10"
                 />
                 <div>
-                  <h3 className="text-lg font-bold">
+                  <h3 className="text-base font-bold">
                     Filadelfia Christian Centre
                   </h3>
-                  <p className="text-sm text-gray-400">
+                  <p className="text-xs text-gray-400">
                     Tanzania Assemblies of God
                   </p>
                 </div>
@@ -809,11 +1016,11 @@ export default function HomePage() {
             </div>
 
             <div>
-              <h4 className="font-semibold mb-4">Quick Links</h4>
-              <ul className="space-y-2 text-sm">
+              <h4 className="font-semibold mb-3 text-sm">Quick Links</h4>
+              <ul className="space-y-1.5 text-sm">
                 <li>
                   <a
-                    href="#"
+                    href="/about"
                     className="text-gray-400 hover:text-white transition-colors"
                   >
                     About Us
@@ -821,7 +1028,7 @@ export default function HomePage() {
                 </li>
                 <li>
                   <a
-                    href="#"
+                    href="/ministries"
                     className="text-gray-400 hover:text-white transition-colors"
                   >
                     Ministries
@@ -829,7 +1036,7 @@ export default function HomePage() {
                 </li>
                 <li>
                   <a
-                    href="#"
+                    href="/sermons"
                     className="text-gray-400 hover:text-white transition-colors"
                   >
                     Sermons
@@ -837,7 +1044,7 @@ export default function HomePage() {
                 </li>
                 <li>
                   <a
-                    href="#"
+                    href="/events"
                     className="text-gray-400 hover:text-white transition-colors"
                   >
                     Events
@@ -847,54 +1054,18 @@ export default function HomePage() {
             </div>
 
             <div>
-              <h4 className="font-semibold mb-4">Ministries</h4>
-              <ul className="space-y-2 text-sm">
-                <li>
-                  <a
-                    href="#"
-                    className="text-gray-400 hover:text-white transition-colors"
-                  >
-                    Children's Ministry
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#"
-                    className="text-gray-400 hover:text-white transition-colors"
-                  >
-                    Youth Ministry
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#"
-                    className="text-gray-400 hover:text-white transition-colors"
-                  >
-                    Women's Ministry
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#"
-                    className="text-gray-400 hover:text-white transition-colors"
-                  >
-                    Men's Ministry
-                  </a>
-                </li>
-              </ul>
-            </div>
-
-            <div>
-              <h4 className="font-semibold mb-4">Contact Info</h4>
-              <div className="space-y-2 text-sm text-gray-400 mb-6">
+              <h4 className="font-semibold mb-3 text-sm">Contact Info</h4>
+              <div className="space-y-1.5 text-sm text-gray-400">
                 <p>123 Church Street</p>
                 <p>Dar es Salaam, Tanzania</p>
                 <p>+255 123 456 789</p>
                 <p>info@filadelfiatz.org</p>
               </div>
-              
-              <h4 className="font-semibold mb-4">Follow Us</h4>
-              <div className="flex gap-3">
+            </div>
+
+            <div>
+              <h4 className="font-semibold mb-3 text-sm">Follow Us</h4>
+              <div className="flex gap-2">
                 <a
                   href="https://facebook.com/filadelfiatz"
                   target="_blank"
@@ -902,7 +1073,7 @@ export default function HomePage() {
                   className="bg-[#1877F2] text-white p-2 rounded-full hover:bg-blue-600 transition-colors"
                   title="Follow us on Facebook"
                 >
-                  <Facebook size={20} />
+                  <Facebook size={16} />
                 </a>
                 <a
                   href="https://instagram.com/filadelfiatz"
@@ -911,7 +1082,7 @@ export default function HomePage() {
                   className="bg-[#E4405F] text-white p-2 rounded-full hover:bg-pink-600 transition-colors"
                   title="Follow us on Instagram"
                 >
-                  <Instagram size={20} />
+                  <Instagram size={16} />
                 </a>
                 <a
                   href="https://wa.me/255123456789"
@@ -920,7 +1091,7 @@ export default function HomePage() {
                   className="bg-[#25D366] text-white p-2 rounded-full hover:bg-green-600 transition-colors"
                   title="Chat with us on WhatsApp"
                 >
-                  <MessageCircle size={20} />
+                  <MessageCircle size={16} />
                 </a>
                 <a
                   href="https://youtube.com/@filadelfiatz"
@@ -929,13 +1100,13 @@ export default function HomePage() {
                   className="bg-[#FF0000] text-white p-2 rounded-full hover:bg-red-600 transition-colors"
                   title="Subscribe to our YouTube channel"
                 >
-                  <Youtube size={20} />
+                  <Youtube size={16} />
                 </a>
               </div>
             </div>
           </div>
 
-          <div className="border-t border-gray-700 mt-8 pt-8 text-center text-sm text-gray-400">
+          <div className="border-t border-gray-700 mt-6 pt-6 text-center text-sm text-gray-400">
             <div className="flex justify-between items-center">
               <p>&copy; 2025 Filadelfia Christian Centre. All rights reserved.</p>
               

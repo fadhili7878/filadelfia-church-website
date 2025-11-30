@@ -15,8 +15,10 @@ import {
   MapPin,
   Mail,
   Phone,
+  Shield,
 } from "lucide-react";
 import { imageStorage } from '@/lib/storage';
+import Footer from '@/components/Footer';
 
 export default function AboutPage() {
   const [activeTab, setActiveTab] = useState("history");
@@ -66,40 +68,40 @@ export default function AboutPage() {
 
   const values = [
     {
-      icon: BookOpen,
-      title: "Biblical Foundation",
+      icon: Heart,
+      title: "Love",
       description:
-        "We believe in the authority and truth of God's Word as our foundation for faith and practice.",
+        "We believe in demonstrating God's unconditional love to everyone, creating a welcoming community where all feel accepted, valued, and cared for.",
     },
     {
-      icon: Heart,
-      title: "Love & Compassion",
+      icon: BookOpen,
+      title: "Faith",
       description:
-        "We strive to show Christ's love to everyone, creating a welcoming environment for all people.",
+        "We are committed to growing in faith through prayer, worship, and studying God's Word, trusting in His promises and guidance for our lives.",
     },
     {
       icon: Users,
       title: "Community",
       description:
-        "We believe in the power of fellowship and building strong relationships within the body of Christ.",
+        "We foster genuine relationships and fellowship, supporting one another through life's challenges and celebrating together in times of joy.",
+    },
+    {
+      icon: Shield,
+      title: "Integrity",
+      description:
+        "We strive to live with honesty, transparency, and moral excellence, reflecting Christ's character in all we do and say.",
     },
     {
       icon: Flame,
-      title: "Spirit-Led Ministry",
+      title: "Service",
       description:
-        "We depend on the Holy Spirit's guidance in all our worship, teaching, and ministry activities.",
+        "We are called to serve others with humility and compassion, following Jesus' example of selfless love and making a positive impact in our community.",
     },
     {
       icon: Globe,
-      title: "Global Vision",
+      title: "Mission",
       description:
-        "We are committed to spreading the Gospel locally in Tanzania and supporting missions worldwide.",
-    },
-    {
-      icon: Award,
-      title: "Excellence",
-      description:
-        "We pursue excellence in all we do, giving our best effort to honor God in every aspect of ministry.",
+        "We are passionate about sharing the Gospel and making disciples, both locally in Tanzania and around the world, fulfilling the Great Commission.",
     },
   ];
 
@@ -270,20 +272,22 @@ export default function AboutPage() {
                 </h3>
                 <div className="space-y-4 text-gray-600">
                   <p>
-                    Filadelfia Christian Centre was founded in 2008 with a
+                    Filadelfia Christian Centre was founded in 2011 with a
                     vision to create a welcoming space where people could
                     encounter God's love and grow in their faith.
                   </p>
                   <p>
-                    What started as a small group of believers meeting in a
-                    rented hall has grown into a thriving congregation of over
-                    500 members, impacting our community through various
-                    ministries and outreach programs.
+                    What began as a small gathering of passionate believers has
+                    blossomed into a vibrant community of faith, where lives are
+                    transformed through powerful worship, biblical teaching, and
+                    authentic fellowship.
                   </p>
                   <p>
                     Throughout our journey, we have remained committed to our
                     core values of biblical teaching, Spirit-led worship, and
-                    compassionate service to others.
+                    compassionate service to others. Our church family continues
+                    to grow as we impact our community through various
+                    ministries and outreach programs.
                   </p>
                 </div>
               </div>
@@ -381,29 +385,34 @@ export default function AboutPage() {
       </section>
 
       {/* Our Values */}
-      <section className="py-16">
+      <section className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-gray-800 mb-4">
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4">
               Our Core Values
             </h2>
-            <p className="text-gray-600 max-w-2xl mx-auto">
-              These values guide everything we do as a church community and
-              shape our approach to ministry.
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              The foundational principles that guide our church family and shape our community
             </p>
           </div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          
+          <div className="grid md:grid-cols-3 gap-8">
             {values.map((value, index) => {
               const IconComponent = value.icon;
               return (
                 <div
                   key={index}
-                  className="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow"
+                  className="bg-gradient-to-br from-[#E31E24]/5 to-[#FFD500]/5 p-8 rounded-lg shadow-lg hover:shadow-xl transition-all transform hover:scale-105 border-l-4 border-[#E31E24]"
                 >
-                  <IconComponent className="h-12 w-12 text-[#E31E24] mb-4" />
-                  <h3 className="text-xl font-semibold mb-3">{value.title}</h3>
-                  <p className="text-gray-600">{value.description}</p>
+                  <div className="flex items-center gap-4 mb-4">
+                    <div className="bg-[#E31E24] text-white p-4 rounded-full">
+                      <IconComponent className="h-8 w-8" />
+                    </div>
+                    <h3 className="text-2xl font-bold text-gray-800">{value.title}</h3>
+                  </div>
+                  <p className="text-gray-600 leading-relaxed">
+                    {value.description}
+                  </p>
                 </div>
               );
             })}
@@ -504,122 +513,7 @@ export default function AboutPage() {
       </section>
 
       {/* Footer */}
-      <footer className="bg-gray-800 text-white py-12">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="grid md:grid-cols-4 gap-8">
-            <div>
-              <div className="flex items-center gap-3 mb-4">
-                <img
-                  src="https://ucarecdn.com/a249fb92-9b2c-4213-9811-b343543f6162/-/format/auto/"
-                  alt="TAG Logo"
-                  className="h-12 w-12"
-                />
-                <div>
-                  <h3 className="text-lg font-bold">
-                    Filadelfia Christian Centre
-                  </h3>
-                  <p className="text-sm text-gray-400">
-                    Tanzania Assemblies of God
-                  </p>
-                </div>
-              </div>
-              <p className="text-gray-400 text-sm">
-                A community of faith, hope, and love in Jesus Christ.
-              </p>
-            </div>
-
-            <div>
-              <h4 className="font-semibold mb-4">Quick Links</h4>
-              <ul className="space-y-2 text-sm">
-                <li>
-                  <a
-                    href="/about"
-                    className="text-gray-400 hover:text-white transition-colors"
-                  >
-                    About Us
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="/ministries"
-                    className="text-gray-400 hover:text-white transition-colors"
-                  >
-                    Ministries
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="/sermons"
-                    className="text-gray-400 hover:text-white transition-colors"
-                  >
-                    Sermons
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="/events"
-                    className="text-gray-400 hover:text-white transition-colors"
-                  >
-                    Events
-                  </a>
-                </li>
-              </ul>
-            </div>
-
-            <div>
-              <h4 className="font-semibold mb-4">Ministries</h4>
-              <ul className="space-y-2 text-sm">
-                <li>
-                  <a
-                    href="/ministries"
-                    className="text-gray-400 hover:text-white transition-colors"
-                  >
-                    Children's Ministry
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="/ministries"
-                    className="text-gray-400 hover:text-white transition-colors"
-                  >
-                    Youth Ministry
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="/ministries"
-                    className="text-gray-400 hover:text-white transition-colors"
-                  >
-                    Women's Ministry
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="/ministries"
-                    className="text-gray-400 hover:text-white transition-colors"
-                  >
-                    Men's Ministry
-                  </a>
-                </li>
-              </ul>
-            </div>
-
-            <div>
-              <h4 className="font-semibold mb-4">Contact Info</h4>
-              <div className="space-y-2 text-sm text-gray-400">
-                <p>123 Church Street</p>
-                <p>Dar es Salaam, Tanzania</p>
-                <p>+255 123 456 789</p>
-                <p>info@filadelfiatz.org</p>
-              </div>
-            </div>
-          </div>
-
-          <div className="border-t border-gray-700 mt-8 pt-8 text-center text-sm text-gray-400">
-            <p>&copy; 2025 Filadelfia Christian Centre. All rights reserved.</p>
-          </div>
-        </div>
-      </footer>
+      <Footer />
 
       <style jsx global>{`
         @keyframes float {
